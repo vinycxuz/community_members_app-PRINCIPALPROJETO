@@ -1,8 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useMutation } from '@tanstack/react-query';
+import { createPosts } from '../../API/posts/postsAPI';
 
 const CreatePost = () => {
+  const postMutation = useMutation({
+    mutationKey:['createPost'],
+    mutation: createPosts
+  });
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -13,7 +19,7 @@ const CreatePost = () => {
       description: Yup.string().required("Description is required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      postMutation.mutate(values);
     },
 });
   return (
