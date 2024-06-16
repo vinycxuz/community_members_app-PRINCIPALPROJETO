@@ -59,7 +59,32 @@ app.put('/api/posts/update/:id', async (req, res) => {
   }
 });
 
+app.get('/api/posts/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    res.status(200).json(post);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
+app.delete('/api/posts/delete/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    await Post.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Post deleted' });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
