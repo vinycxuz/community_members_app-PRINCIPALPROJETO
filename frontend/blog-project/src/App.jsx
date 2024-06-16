@@ -5,7 +5,7 @@ import PostsList from './components/Posts/PostsList'
 import Home from './components/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavBar from './components/NavBar'
-import PostDetails from './components/Posts/PostDetails'
+import UpdatePost from './components/Posts/UpdatePost'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,7 +17,7 @@ function App() {
         <Route element={<Home />} path="/" />
         <Route element={<CreatePost />} path="/create-post" />
         <Route element={<PostsList />} path="/list-post" />
-        <Route element={<PostDetails />} path="/posts/:id" />
+        <Route element={<UpdatePost />} path="/posts/:id" />
       </Routes>
     </BrowserRouter>
   )
