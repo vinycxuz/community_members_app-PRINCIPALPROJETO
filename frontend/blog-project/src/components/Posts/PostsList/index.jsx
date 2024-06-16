@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query'
-import { getPosts } from '../../API/posts/postsAPI';
+import { getPosts } from '../../../API/posts/postsAPI';
 
 const PostsList = () => {
   const { isLoading, data, error, isSuccess } = useQuery({

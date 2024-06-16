@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
-import { createPost } from '../../API/posts/postsAPI';
+import { createPost } from '../../../API/posts/postsAPI';
 
 const CreatePost = () => {
   const postMutation = useMutation({
