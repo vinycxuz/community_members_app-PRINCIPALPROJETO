@@ -36,6 +36,31 @@ app.get('/api/posts', async (req, res) => {
   }
 });
 
+app.put('/api/posts/update/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    const postUpdated = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        description: req.body.description,
+      },
+      { 
+        new: true 
+      }
+    );
+    res.status(200).json(postUpdated);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
