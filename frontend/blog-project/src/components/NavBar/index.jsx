@@ -10,6 +10,9 @@ const NavBar = () => {
         <li>
           <a href="/create-post">Create Post</a>
         </li>
+        <li>
+          <a href="/list-post">List Posts</a>
+        </li>
       </ul>
     </nav>
   );
