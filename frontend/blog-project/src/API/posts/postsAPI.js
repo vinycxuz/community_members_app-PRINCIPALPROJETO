@@ -15,3 +15,8 @@ export const getPosts = async () => {
     const posts = await axios.get('http://localhost:3000/api/posts');
     return posts.data;
 }
+
+export const getPost = async (id) => {
+  const posts = await axios.get(`http://localhost:3000/api/posts/${id}`);
+  return posts.data;
+}

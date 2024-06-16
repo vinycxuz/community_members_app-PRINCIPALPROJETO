@@ -17,7 +17,7 @@ function App() {
         <Route element={<Home />} path="/" />
         <Route element={<CreatePost />} path="/create-post" />
         <Route element={<PostsList />} path="/list-post" />
-        <Route element={<PostDetails />} path="/post/:id" />
+        <Route element={<PostDetails />} path="/posts/:id" />
       </Routes>
     </BrowserRouter>
   )
