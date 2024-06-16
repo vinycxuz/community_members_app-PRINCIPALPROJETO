@@ -8,6 +8,10 @@ export const createPost = async (post) => {
       title: post.title,
       description: post.description,
     });
-    return response.data; 
-    
+    return response.data;    
+}
+
+export const getPosts = async () => {
+    const posts = await axios.get('http://localhost:3000/api/posts');
+    return posts.data;
 }
