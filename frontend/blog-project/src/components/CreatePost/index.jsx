@@ -28,8 +28,18 @@ const CreatePost = () => {
       postMutation.mutate(post);
     },
 });
+
+  const isLoading = postMutation.isPending;
+
+  const isError = postMutation.isError;
+
+  const isSuceess = postMutation.isSuccess;
+
   return (
     <div>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error...</div>}
+      {isSuceess && <div>Post created</div>}
       <form onSubmit={formik.handleSubmit}>
         <input 
           type='text' 
