@@ -16,13 +16,13 @@ app.use(cors(corsOptions));
 
 dbConnect();
 
-app.post('/api/posts/create', async (req, res) => {
+app.post('/api/posts/create', async (req, res, next) => {
   try {
     const postCreated = await Post.create(req.body);
     res.status(200).json(postCreated);
   }
   catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
@@ -84,6 +84,10 @@ app.delete('/api/posts/delete/:id', async (req, res) => {
   catch (error) {
     res.status(500).json({ message: error.message });
   }
+});
+
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
 });
 
 app.listen(3000, () => {
