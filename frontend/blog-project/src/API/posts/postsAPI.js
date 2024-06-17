@@ -31,6 +31,6 @@ export const updatePost = async (post) => {
 }
 
 export const deletePost = async (id) => {
-  const posts = await axios.get(`http://localhost:3000/api/posts/${id}`);
+  const posts = await axios.delete(`http://localhost:3000/api/posts/delete/${id}`);
   return posts.data;
 }
