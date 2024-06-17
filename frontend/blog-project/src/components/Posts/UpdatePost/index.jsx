@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { getPost } from '../../../API/posts/postsAPI';
+import { getPost, updatePost } from '../../../API/posts/postsAPI';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,16 +12,15 @@ const UpdatePost = () => {
     queryKey: ['post-details'],
     queryFn: () => getPost(id),
   });
-  console.log(data);
 
   const postMutation = useMutation({
     mutationKey: ['update-post'],
-    mutationFn: ()=> {},
+    mutationFn: updatePost,
   });
   const formik = useFormik({
     initialValues: {
       title: data?.title || "",
-      description: "",
+      description: data?.description || "",
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -32,12 +31,17 @@ const UpdatePost = () => {
       const post = {
         title: values.title,
         description: values.description,
+        id,
       };
 
-      console.log(post);
+      console.log(post?.id);
       postMutation.mutate(post);
     },
   });
+
+  const isLoading = postMutation.isPending;
+  const isError = postMutation.isError;
+  const isSuccess = postMutation.isSuccess;
 
   return (
     <div>
@@ -45,7 +49,10 @@ const UpdatePost = () => {
         <div>
           <h2>{data.title}</h2>
           <div>
-            <form>
+            {isLoading && <div>Loading...</div>}
+            {isError && <div>Error...</div>}
+            {isSuccess && <div>Post updated</div>}
+            <form onSubmit={formik.handleSubmit}>
               <input 
                 type='text' 
                 name='title'
@@ -62,7 +69,7 @@ const UpdatePost = () => {
                 {formik.touched.description && formik.errors.description ? (
                   <div>{formik.errors.description}</div>
                 ) : null}
-              <button type="submit">Create</button>
+              <button type="submit">Update</button>
             </form>
           </div>
         </div>
