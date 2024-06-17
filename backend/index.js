@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('express-async-handler');
 const dbConnect = require('./utils/dbConnect');
 const app = express();
 const cors = require('cors');
@@ -16,28 +17,17 @@ app.use(cors(corsOptions));
 
 dbConnect();
 
-app.post('/api/posts/create', async (req, res, next) => {
-  try {
+app.post('/api/posts/create', asyncHandler (async (req, res, next) => {
     const postCreated = await Post.create(req.body);
     res.status(200).json(postCreated);
-  }
-  catch (error) {
-    next(error);
-  }
-});
+}));
 
-app.get('/api/posts', async (req, res) => {
-  try {
+app.get('/api/posts', asyncHandler(async (req, res) => {
     const posts = await Post.find();
     res.status(200).json(posts);
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+}));
 
-app.put('/api/posts/update/:id', async (req, res) => {
-  try {
+app.put('/api/posts/update/:id', asyncHandler(async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
@@ -53,26 +43,17 @@ app.put('/api/posts/update/:id', async (req, res) => {
       }
     );
     res.status(200).json(postUpdated);
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+}));
 
-app.get('/api/posts/:id', async (req, res) => {
-  try {
+app.get('/api/posts/:id', asyncHandler(async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
-    res.status(200).json(post);
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+    res.status(200).json(post)
+}));
 
-app.delete('/api/posts/delete/:id', async (req, res) => {
+app.delete('/api/posts/delete/:id', asyncHandler (async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -84,11 +65,7 @@ app.delete('/api/posts/delete/:id', async (req, res) => {
   catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
-
-app.use((error, req, res, next) => {
-  res.status(500).json({ message: error.message });
-});
+}));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
