@@ -20,3 +20,12 @@ export const getPost = async (id) => {
   const posts = await axios.get(`http://localhost:3000/api/posts/${id}`);
   return posts.data;
 }
+
+export const updatePost = async (post) => {
+  console.log(post?.id);
+  const response = await axios.put(`http://localhost:3000/api/posts/update/${post?.id}`, {
+    title: post.title,
+    description: post.description,
+  });
+  return response.data;    
+}
