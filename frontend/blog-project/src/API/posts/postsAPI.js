@@ -29,3 +29,8 @@ export const updatePost = async (post) => {
   });
   return response.data;    
 }
+
+export const deletePost = async (id) => {
+  const posts = await axios.get(`http://localhost:3000/api/posts/${id}`);
+  return posts.data;
+}
