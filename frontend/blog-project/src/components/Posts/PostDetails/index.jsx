@@ -1,6 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  FaThumbsUp,
+  FaThumbsDown,
+  FaEye,
+  FaEdit,
+  FaTrashAlt,
+  FaComment,
+} from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
+import * as Yup from "yup";
 import { getPost } from '../../../API/posts/postsAPI';
 
 const PostDetails = () => {
