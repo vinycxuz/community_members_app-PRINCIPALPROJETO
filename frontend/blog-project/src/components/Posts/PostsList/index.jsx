@@ -31,8 +31,9 @@ const PostsList = () => {
       {error && <p>Error</p>}
     {data && data.map((post) => (
       <div key={post._id}>
-        <h2>{post.title}</h2>
-        <p>{post.description}</p>
+        <div
+          dangerouslySetInnerHTML={{__html: post?.description}}
+        />
         <Link to={`/posts/${post?._id}`}>
           <button>Edit</button>
         </Link>
