@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { deletePost, getPosts } from '../../../API/posts/postsAPI';
 import { Link } from 'react-router-dom';
 
-import NoDataFound from '../../Alert';
+import { NoDataFound, AlertMessage} from '../../Alert';
 
 import "../post.style.css";
 
@@ -30,10 +30,10 @@ const PostsList = () => {
   }; */
   console.log(data)
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <AlertMessage type='loading' message='Loading '/>;
   }
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <AlertMessage type='error' message='error' />;
   }
   if (isSuccess && data.length === 0) {
     return <NoDataFound />;
