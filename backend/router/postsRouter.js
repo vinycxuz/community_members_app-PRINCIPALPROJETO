@@ -3,7 +3,7 @@ const postRouter = express.Router();
 const cloudinary = require('cloudinary').v2;
 
 const cloudinaryConfig = require('../utils/fileUpload');
-cloudinaryConfig.cloudinaryConfig();
+// cloudinaryConfig.cloudinaryConfig();
 
 const postController = require('../controllers/postController');
 
