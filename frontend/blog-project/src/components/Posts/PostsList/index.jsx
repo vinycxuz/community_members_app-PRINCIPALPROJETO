@@ -2,6 +2,9 @@ import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { deletePost, getPosts } from '../../../API/posts/postsAPI';
 import { Link } from 'react-router-dom';
+
+import NoDataFound from '../../Alert';
+
 import "../post.style.css";
 
 const PostsList = () => {
@@ -15,7 +18,7 @@ const PostsList = () => {
     mutationFn: deletePost,
   });
 
-  // const deleteHandler = async (id) => {
+  /* const deleteHandler = async (id) => {
     postMutation.mutateAsync(id)
     .then(() => {
       refetch();
@@ -24,7 +27,7 @@ const PostsList = () => {
       console.log(error);
     });
 
-  // };
+  }; */
   console.log(data)
   if (isLoading) {
     return <div>Loading...</div>;
@@ -33,7 +36,7 @@ const PostsList = () => {
     return <div>Error: {error.message}</div>;
   }
   if (isSuccess && data.length === 0) {
-    return <div>No posts found</div>;
+    return <NoDataFound />;
   }
   return (
     <section className="overflow-hidden">
