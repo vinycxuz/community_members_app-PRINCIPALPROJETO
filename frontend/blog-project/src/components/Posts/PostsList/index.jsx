@@ -3,7 +3,9 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { deletePost, getPosts } from '../../../API/posts/postsAPI';
 import { Link } from 'react-router-dom';
 
-import { NoDataFound, AlertMessage} from '../../Alert';
+import AlertMessage from '../../Alert/AlertMessage';
+import NoDataFound from '../../Alert/NoDataFound';
+
 
 import "../post.style.css";
 

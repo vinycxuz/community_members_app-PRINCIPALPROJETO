@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import { createPost } from '../../../API/posts/postsAPI';
+import AlertMessage from '../../Alert/AlertMessage';
 
 const CreatePost = () => {
 
@@ -34,9 +35,16 @@ const CreatePost = () => {
 
   const isLoading = postMutation.isPending;
 
-  const isError = postMutation.isError;
+  const error = postMutation.isError;
 
-  const isSuceess = postMutation.isSuccess;
+  const isSuccess = postMutation.isSuccess;
+
+  if (isLoading) {
+    return <AlertMessage type='loading' message='Loading '/>;
+  }
+  if (error) {
+    return <AlertMessage type='error' message='error' />;
+  }
 
   return (
     <div className="flex items-center justify-center">
@@ -45,10 +53,12 @@ const CreatePost = () => {
           Add New Post
         </h2>
         
-
+        {isSuccess && (
+          <AlertMessage type='success' message='Post created successfully' />
+        )}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           
-          <div>
+          <div className='mb-10'>
             <label
               htmlFor="description"
               className="block text-sm font-medium text-gray-700"
@@ -61,6 +71,7 @@ const CreatePost = () => {
                 setDescription(value);
                 formik.setFieldValue("description", value);
               }}
+              className='h-40'
             />
             
             {formik.touched.description && formik.errors.description && (
