@@ -2,7 +2,9 @@ const express = require('express');
 const dbConnect = require('./utils/dbConnect');
 const app = express();
 const cors = require('cors');
+
 const postsRouter = require('./router/postsRouter');
+const userRouter = require('./router/userRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,6 +16,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/', postsRouter);
+
+app.use('/user', userRouter);
 
 dbConnect();
 
