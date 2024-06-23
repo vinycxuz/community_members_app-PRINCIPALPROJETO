@@ -2,6 +2,7 @@ const express = require('express');
 const dbConnect = require('./utils/dbConnect');
 const app = express();
 const cors = require('cors');
+const passport = require('./utils/passportConfig');
 
 const postsRouter = require('./router/postsRouter');
 const userRouter = require('./router/userRouter');
@@ -14,6 +15,8 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+app.use(passport.initialize());
 
 app.use('/', postsRouter);
 
