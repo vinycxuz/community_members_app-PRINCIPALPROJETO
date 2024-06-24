@@ -1,6 +1,6 @@
 const User = require('../models/user/user.model');
 const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
@@ -24,39 +24,18 @@ const userController = {
     });
 
     res.status(201).json({
-      _id: userRegistered._id,
-      username: userRegistered.username,
-      email: userRegistered.email,
-      token: null
+      userRegistered,
+      message: 'User registered successfully'
     });
   }),
-  login: asyncHandler(async (req, res) => {
-    passport.authenticate('local', (err, user, info) => {
-      if (err) {
-        res.status(500);
-        return next(err);
-      }
-      if (!user) {
-        res.status(401);
-        return next(new Error(info.message));
-      }
-      const token = jwt.sign(
-        { id: user._id },
-        process.env.JWT_SECRET,
-    );
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
-    });
-    console.log(token);
-    res.json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      token,
-    });
-},)
-})};
+
+  login: asyncHandler(async (req, res, next) => {
+    passport.authenticate('local', { failureFlash: true },)
+}),
+  getUsers: asyncHandler(async (req, res) => {
+    const users = await User.find();
+    res.status(200).json(users);
+  }),
+};
 
 module.exports = userController;
