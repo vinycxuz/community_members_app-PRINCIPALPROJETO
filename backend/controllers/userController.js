@@ -1,6 +1,8 @@
 const User = require('../models/user/user.model');
 const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 const userController = {
   register: asyncHandler(async (req, res) => {
@@ -22,12 +24,18 @@ const userController = {
     });
 
     res.status(201).json({
-      _id: userRegistered._id,
-      username: userRegistered.username,
-      email: userRegistered.email,
-      token: null
+      userRegistered,
+      message: 'User registered successfully'
     });
   }),
 }
+  login: asyncHandler(async (req, res, next) => {
+    passport.authenticate('local', { failureFlash: true },)
+}),
+  getUsers: asyncHandler(async (req, res) => {
+    const users = await User.find();
+    res.status(200).json(users);
+  }),
+};
 
 module.exports = userController;
