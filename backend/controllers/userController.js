@@ -28,7 +28,7 @@ const userController = {
       message: 'User registered successfully'
     });
   }),
-
+}
   login: asyncHandler(async (req, res, next) => {
     passport.authenticate('local', { failureFlash: true },)
 }),
