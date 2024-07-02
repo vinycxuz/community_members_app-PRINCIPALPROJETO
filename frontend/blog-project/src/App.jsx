@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import UpdatePost from './components/Posts/UpdatePost'
 import PostDetails from './components/Posts/PostDetails'
+import Login from './components/User/Login'
+import Register from './components/User/Register'
 
 function App() {
   const [count, setCount] = useState(0)
