@@ -23,13 +23,13 @@ To get started with this project, follow the steps below:
 1. Clone the repository:
 
   ```bash
-  git clone https://github.com/your-username/your-project.git
+  git clone https://github.com/vinycxuz/blog_project.git
   ```
 
 2. Navigate to the project directory:
 
   ```bash
-  cd your-project
+  cd frontend/blog-project
   ```
 
 3. Install the dependencies:
@@ -48,7 +48,7 @@ To get started with this project, follow the steps below:
 
 ## Dependencies
 
-This project utilizes the following dependencies:
+This project utilizes the following dependencies in front-end:
 
 - [HandlessUI](https://handlessui.com): A set of accessible UI components for React.
 - [Heroicons](https://heroicons.com): A collection of free SVG icons for your projects.
