@@ -3,15 +3,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { registerAPI } from "../../APIServices/users/usersAPI";
-import AlertMessage from "../Alert/AlertMessage";
+import { registerAPI } from "../../../API/users/usersAPI";
+import AlertMessage from "../../Alert/AlertMessage";
 
 const Register = () => {
   //navigate
   const navigate = useNavigate();
   // user mutation
   const userMutation = useMutation({
-    mutationKey: ["user-registration"],
+    mutationKey: ["user-register"],
     mutationFn: registerAPI,
   });
   // formik config
@@ -37,7 +37,7 @@ const Register = () => {
         .mutateAsync(values)
         .then(() => {
           // redirect
-          navigate("/login");
+          navigate("/user-login");
         })
         .catch((err) => console.log(err));
     },
@@ -49,7 +49,7 @@ const Register = () => {
         <div className="flex flex-col justify-center py-24 max-w-md mx-auto h-full">
           <form onSubmit={formik.handleSubmit}>
             <Link
-              to="/login"
+              to="/user-login"
               className="inline-block text-gray-500 hover: transition duration-200 mb-8"
             >
               <span>Already have an account?</span> {""}

@@ -3,15 +3,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { loginAPI, registerAPI } from "../../APIServices/users/usersAPI";
-import AlertMessage from "../Alert/AlertMessage";
+import { loginAPI } from "../../../API/users/usersAPI";
+import AlertMessage from "../../Alert/AlertMessage";
 
 const Login = () => {
   //navigate
   const navigate = useNavigate();
   // user mutation
   const userMutation = useMutation({
-    mutationKey: ["user-registration"],
+    mutationKey: ["user-login"],
     mutationFn: loginAPI,
   });
   // formik config
