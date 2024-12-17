@@ -4,51 +4,66 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const secretToken = require('../utils/secretToken');
 
 dotenv.config();
 
 const userController = {
   register: asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
-    const userExists = await User.findOne({
-      email, username
-    });
+    const userExists = await User.findOne({ email }); // Check by email only
+    try {
     if (userExists) {
       res.status(400);
       throw new Error('User already exists');
     }
     
     const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({ ...req.body, password: hashedPassword });
 
-    const userRegistered = await User.create({
-      username,
-      email,
-      password: hashedPassword
+    const createSecretToken = secretToken(newUser._id);
+    res.cookie('secretToken', createSecretToken, {
+      httpOnly: false,
+      withCredentials: true
     });
 
-    res.status(201).json({
-      userRegistered,
-      message: 'User registered successfully'
-    });
+    res.status(201).json(newUser);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+
   }),
 
   login: asyncHandler(async (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-      if (err) {
-        return next(err);
+    try {
+      const { email, password } = req.body;
+      if(!email || !password) {
+        return res.status(400).json({ message: 'Please provide email and password' });
       }
+      const user = await User.findOne({ email })
       if (!user) {
-        return res.status(400).json({ message: 'Invalid username or password' });
+        return res.status(400).json({ message: 'invalid user or password' });
       }
-      req.logIn(user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        const token = jwt.sign({ id: user._id }, process.env.secret_key, { expiresIn: '1h' });
-        return res.json({ token });
+
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        return res.status(400).json({ message: 'invalid user or password' });
+      }
+
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '3d'
       });
-    })(req, res, next);
-  }),
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        withCredentials: true
+      });
+
+      res.status(200).json({ message: 'Login success' });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }}),
   
   getUsers: asyncHandler(async (req, res) => {
     const users = await User.find();

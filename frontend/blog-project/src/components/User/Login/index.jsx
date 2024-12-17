@@ -18,12 +18,12 @@ const Login = () => {
   const formik = useFormik({
     // initial data
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     // validation
     validationSchema: Yup.object({
-      username: Yup.string().required("Username is required"),
+      email: Yup.string().required("Username is required"),
       password: Yup.string().required("Password is required"),
     }),
     // submit
@@ -33,7 +33,7 @@ const Login = () => {
         .mutateAsync(values)
         .then(() => {
           // redirect
-          // navigate("/login");
+          navigate("/");
         })
         .catch((err) => console.log(err));
     },
@@ -77,11 +77,11 @@ const Login = () => {
               className="w-full rounded-full p-4 outline-none border border-gray-100 shadow placeholder-gray-500 focus:ring focus:ring-orange-200 transition duration-200 mb-4"
               type="text"
               placeholder="Enter username"
-              {...formik.getFieldProps("username")}
+              {...formik.getFieldProps("email")}
             />
             {/* error */}
-            {formik.touched.username && formik.errors.username && (
-              <div className="text-red-500 mt-1">{formik.errors.username}</div>
+            {formik.touched.email && formik.errors.email && (
+              <div className="text-red-500 mt-1">{formik.errors.email}</div>
             )}
             <label
               className="block text-sm font-medium mb-2"

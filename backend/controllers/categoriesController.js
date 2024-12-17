@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Post = require('../models/post/Post.model');
+const Category = require('../models/category/Category.model');
 
 const createPost = asyncHandler (async (req, res) => {
   const postCreated = await Post.create(req.body);
