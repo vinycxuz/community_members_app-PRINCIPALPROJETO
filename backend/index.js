@@ -6,6 +6,7 @@ const passport = require('./utils/passportConfig');
 
 const postsRouter = require('./router/postsRouter');
 const userRouter = require('./router/userRouter');
+const categoryRouter = require('./router/categoryRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,8 @@ app.use(passport.initialize());
 app.use('/user', userRouter);
 
 app.use('/', postsRouter);
+
+app.use('/', categoryRouter);
 
 dbConnect();
 

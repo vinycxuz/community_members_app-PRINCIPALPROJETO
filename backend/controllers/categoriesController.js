@@ -1,50 +1,60 @@
 const asyncHandler = require('express-async-handler');
-const Post = require('../models/post/Post.model');
 const Category = require('../models/category/Category.model');
 
-const createPost = asyncHandler (async (req, res) => {
-  const postCreated = await Post.create(req.body);
-  res.status(200).json(postCreated);
-});
+const createCategory = asyncHandler (async (req, res) => {
+  const { categoryName, description } = req.body;
 
-const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
-  res.status(200).json(posts);
-});
-
-const updatePost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
+  const categoryFound = await Category.findOne({ categoryName, description });
+  if (categoryFound) {
+    return res.status(404).json({ message: 'Category exist' });
   }
-  const postUpdated = await Post.findByIdAndUpdate(
+
+  const categoryCreated = await Category.create({
+    categoryName,
+    author: req.user
+  });
+  res.status(200).json(categoryCreated);
+
+});
+
+const getCategories = asyncHandler(async (req, res) => {
+  const categories = await Category.find();
+  res.status(200).json(categories);
+});
+
+const updateCategory = asyncHandler(async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (!category) {
+    return res.status(404).json({ message: 'Category not found' });
+  }
+  const categoryUpdated = await Category.findByIdAndUpdate(
     req.params.id,
     {
-      title: req.body.title,
+      categoryName: req.body.categoryName,
       description: req.body.description,
     },
     { 
       new: true 
     }
   );
-  res.status(200).json(postUpdated);
+  res.status(200).json(categoryUpdated);
 });
 
-const getPost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
+const getCategory = asyncHandler(async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (!category) {
+    return res.status(404).json({ message: 'category not found' });
   }
-  res.status(200).json(post)
+  res.status(200).json(category)
 });
 
-const deletePost = asyncHandler (async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
+const deleteCategory = asyncHandler (async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (!category) {
+    return res.status(404).json({ message: 'Category not found' });
   }
-  await Post.findByIdAndDelete(req.params.id);
-  res.status(200).json({ message: 'Post deleted' });
+  await Category.findByIdAndDelete(req.params.id);
+  res.status(200).json({ message: 'Category deleted' });
 });
 
-module.exports = { createPost, getPosts, updatePost, getPost, deletePost };
+module.exports = { createCategory, getCategories, updateCategory, getCategory, deleteCategory };
