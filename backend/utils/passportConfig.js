@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user/user.model');
 
 passport.use(new LocalStrategy({
-  usernameField: 'username',
+  usernameField: 'email', // changed from 'username' to 'email'
 }, async (email, password, done) => {
   try {
     const user = await User.findOne({ email });
