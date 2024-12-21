@@ -69,6 +69,59 @@ const userController = {
     const users = await User.find();
     res.status(200).json(users);
   }),
+
+  googleAuth: passport.authenticate('google', { scope: ['profile'] }),
+
+  googleAuthCallback: asyncHandler(async (req, res) => {
+    passport.authenticate('google', 
+      { 
+        failureRedirect: '/login', 
+        session: false,
+      },
+      (err, user, info) => {
+        if (err) {
+          return res.status(400).json({ message: err.message });
+        }
+        if (!user) {
+          return res.redirect('http://localhost:5173/google-login-error');
+        }
+
+        const token = jwt.sign({ id: user?._id }, process.env.JWT_SECRET, {
+          expiresIn: '3d'
+        });
+
+        res.cookie('token', token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: 'strict',
+          maxAge: 24* 60 * 60 * 1000,
+        });
+
+        res.redirect('http://localhost:5173/dashboard');
+      } 
+    )(req, res, next);
+    
+  }),
+
+  checkAuthenticated: asyncHandler(async (req, res) => {
+    const token = req.cookies['token'];
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      if (user) {
+        return res.status(200).json({isAuthenticated: true});
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(401).json({ message: 'Unauthorized' });
+    }
+  }),
 };
 
 module.exports = userController;

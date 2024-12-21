@@ -3,6 +3,7 @@ const dbConnect = require('./utils/dbConnect');
 const app = express();
 const cors = require('cors');
 const passport = require('./utils/passportConfig');
+const cookieParser = require('cookie-parser');
 
 const postsRouter = require('./router/postsRouter');
 const userRouter = require('./router/userRouter');
@@ -10,6 +11,7 @@ const categoryRouter = require('./router/categoryRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 const corsOptions = {
   origin: ['http://localhost:5173'],
