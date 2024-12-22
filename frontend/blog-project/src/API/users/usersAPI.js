@@ -22,3 +22,10 @@ export const loginAPI = async (userData) => {
 
   return response.data;
 }
+
+export const checkAuthStatusAPI = async () => {
+  const response = await axios.get('http://localhost:3000/user/check-authenticated', {
+    withCredentials: true
+  });
+  return response.data;
+}
