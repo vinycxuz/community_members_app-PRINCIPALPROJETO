@@ -23,6 +23,17 @@ export const loginAPI = async (userData) => {
   return response.data;
 }
 
+export const logoutAPI = async (userData) => {
+  const response = await axios.post('http://localhost:3000/user/logout', {
+    email: userData?.email,
+    password: userData?.password
+  },{
+    withCredentials: true
+  });
+
+  return response.data;
+}
+
 export const checkAuthStatusAPI = async () => {
   const response = await axios.get('http://localhost:3000/user/check-authenticated', {
     withCredentials: true
