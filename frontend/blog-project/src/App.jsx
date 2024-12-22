@@ -3,7 +3,11 @@ import CreatePost from './components/Posts/CreatePost'
 import PostsList from './components/Posts/PostsList'
 import Home from './components/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { isAuthenticated } from './redux/slices/authSlices'
+import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { checkAuthStatusAPI } from './API/users/usersAPI'
 
 import NavBar from './components/NavBar'
 import PrivateNavbar from './components/NavBar/Private'
@@ -14,6 +18,17 @@ import Register from './components/User/Register'
 import Profile from './components/User/Profile'
 
 function App() {
+  const { isLoading, data, error, isSuccess, refetch } = useQuery({
+    queryKey: ['user-auth'],
+    queryFn: checkAuthStatusAPI,
+  });
+  console.log(data)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(isAuthenticated(data));
+  }, [data])
+
   const { userAuth } = useSelector((state) => state.auth)
   console.log(userAuth)
 
