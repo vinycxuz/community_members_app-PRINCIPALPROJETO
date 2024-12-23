@@ -16,6 +16,7 @@ import PostDetails from './components/Posts/PostDetails'
 import Login from './components/User/Login'
 import Register from './components/User/Register'
 import Profile from './components/User/Profile'
+import AuthRoute from './components/Auth'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -43,7 +44,9 @@ function App() {
         <Route element={<PostDetails />} path="/posts/:id" />
         <Route element={<Login />} path="/user-login" />
         <Route element={<Register />} path="/user-register" />
-        <Route element={<Profile />} path="/profile" />
+        <Route element={<AuthRoute>
+                          <Profile />
+                        </AuthRoute>} path="/profile" />
       </Routes>
     </BrowserRouter>
   )
