@@ -18,12 +18,12 @@ const Login = () => {
   const formik = useFormik({
     // initial data
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     // validation
     validationSchema: Yup.object({
-      username: Yup.string().required("Username is required"),
+      email: Yup.string().required("Username is required"),
       password: Yup.string().required("Password is required"),
     }),
     // submit
@@ -33,7 +33,7 @@ const Login = () => {
         .mutateAsync(values)
         .then(() => {
           // redirect
-          // navigate("/login");
+          navigate("/profile");
         })
         .catch((err) => console.log(err));
     },
@@ -77,11 +77,11 @@ const Login = () => {
               className="w-full rounded-full p-4 outline-none border border-gray-100 shadow placeholder-gray-500 focus:ring focus:ring-orange-200 transition duration-200 mb-4"
               type="text"
               placeholder="Enter username"
-              {...formik.getFieldProps("username")}
+              {...formik.getFieldProps("email")}
             />
             {/* error */}
-            {formik.touched.username && formik.errors.username && (
-              <div className="text-red-500 mt-1">{formik.errors.username}</div>
+            {formik.touched.email && formik.errors.email && (
+              <div className="text-red-500 mt-1">{formik.errors.email}</div>
             )}
             <label
               className="block text-sm font-medium mb-2"
@@ -122,11 +122,11 @@ const Login = () => {
               className="h-14 inline-flex items-center justify-center py-4 px-6 text-white font-bold font-heading rounded-full bg-orange-500 w-full text-center border border-orange-600 shadow hover:bg-orange-600 focus:ring focus:ring-orange-200 transition duration-200 mb-8"
               type="submit"
             >
-              Sign Up
+              Login
             </button>
             {/* login with google */}
             <a
-              // href="http://localhost:9000/api/v1/users/auth/google"
+              href="http://localhost:3000/user/auth/google"
               className="h-14 inline-flex items-center justify-center gap-2 py-4 px-6 rounded-full bg-white w-full text-center border border-gray-100 shadow hover:bg-gray-50 focus:ring focus:ring-orange-200 transition duration-200"
               type="submit"
             >
