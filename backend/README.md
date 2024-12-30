@@ -1,50 +1,62 @@
-# Server Setup Guide
 
-This guide will walk you through the steps to start the server and install the required dependencies.
+# Community Members App
 
-## Prerequisites
-Before starting, make sure you have the following installed on your system:
-- Node.js
-- npm (Node Package Manager)
+Aplicação Web de criação de comunidades e membros, na qual permite você gerenciar seus conteúdos para seus membros, possibilitando maior controle e exclusividade:
+- Criação de conteúdos na sua comunidade
+- Personalização de mensalidades e membros
+- Curtidas e comentarios
+- Informações sobre todo seu perfil e comunidade
 
-## Explanation
-The backend using MVC design pattern
-In models, we have all the Schemas that we will use in this project
-- Category for post
-- Comment for post
-- Earning for User the each post
-- Notification
-- Payment for control the payment rulues
-- Plan for create a specific plan for each user's rules, like twitch does
-- Post
-- Profanity
-- User
+Esta aplicação segue sendo desenvolvida frequentemente única e exclusivamente para incremento de portfolio.
 
-## Installation
-1. Clone the repository to your local machine.
-2. Navigate to the project directory in your terminal.
-3. Create a .env and add your credentials
 
-OBS: On feat branch, show the .env real example, just do equal
 
-### Installing Dependencies
-To install the required dependencies, run the following command:
+## Tech Stack
 
-```bash
-npm install bcrypt bcryptjs cloudinary cors dotenv express express-async-handler jsonwebtoken mongoose multer passport passport-local
-```
+Backend:
 
-## Starting the Server
-To start the server, run the following command:
+**Database:** MongoDb, Redis
 
-```bash
-node index
-```
+**Servidor:** Node.js, Express
 
-The server will start running on the specified port.
+**Bibliotecas e frameworks**: bcrypt, cookie-parser, dotenv, helmet, jsonwebtoken, mongoose
 
-## Usage
-Once the server is running, you can access the API endpoints to interact with the backend.
+Frontend:
 
-## Conclusion
-You have successfully started the server and installed the required dependencies. Happy coding!
+**Linguagem:** JavaScript
+
+**Bibliotecas e frameworks**: React, TailwindCSS, Redux, Yup, Axios, React Query, Formik
+
+
+
+
+
+## Environment Variables
+
+Para rodar esse projeto, irá precisar criar um arquivo .env para:
+
+`STRING_CONNECTION` (string conexão do mongodb)
+
+`JWT_SECRET` (para configuração de token)
+
+`GOOGLE_CLIENT_ID` (id da api de login do Google)
+
+`GOOGLE_CLIENT_SECRET` (chave da api de login com o google)
+
+
+## Support
+
+Para suporte, email: vinyby@gmail.com
+
+
+## Next Updates
+
+- Filtrar por recente e outras opções os modelos de categoria, tipos de post, curtidas e data de postagem
+
+- Recuperação de senha e confirmação de e-mail com nodemailer
+
+- Editar a permanência de sessão utilizando redis, atualmente está com tempo de token pré-definido
+
+- Criação dos métodos de pagamento com Strapi (pelo github education tem benefícios exclusivos, mas posteriormente será feito com API de banco brasileiro para pagamentos via pix)
+
+- Bloqueio de usuários, assim como funciona no X por exemplo
