@@ -51,12 +51,10 @@ const userController = {
         return res.status(400).json({ message: 'invalid user or password' });
       }
 
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '3d'
-      });
+      const token = secretToken(user._id);
 
-      res.cookie('token', token, {
-        httpOnly: true,
+      res.cookie('secretToken', token, {
+        httpOnly: false,
         withCredentials: true
       });
 
@@ -104,7 +102,7 @@ const userController = {
   }),
 
   checkAuthenticated: asyncHandler(async (req, res) => {
-    const token = req.cookies['token'];
+    const token = req.cookies['secretToken'];
     if (!token) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -124,7 +122,7 @@ const userController = {
   }),
 
   logout: asyncHandler(async (req, res) => {
-    res.clearCookie('token');
+    res.clearCookie('secretToken');
     res.status(200).json({ message: 'Logout success' });
   }),
 };

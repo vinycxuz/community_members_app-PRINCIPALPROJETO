@@ -6,6 +6,9 @@ export const createPost = async (post) => {
     console.log(post);
     const response = await axios.post(URL, {
       description: post.description,
+    },
+    {
+      withCredentials: true
     });
     return response.data;    
 }

@@ -17,6 +17,8 @@ import Login from './components/User/Login'
 import Register from './components/User/Register'
 import Profile from './components/User/Profile'
 import AuthRoute from './components/Auth'
+import UserDashboard from './components/User/Dashboard'
+import AccountSummaryDashboard from './components/User/AccountSummary'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -38,7 +40,16 @@ function App() {
       {userAuth ? <PrivateNavbar /> : <NavBar />}
       <Routes>
         <Route element={<Home />} path="/" />
-        <Route element={<CreatePost />} path="/create-post" />
+        <Route element={<UserDashboard />} path="/dashboard">
+          <Route element={
+            <AuthRoute>
+              <AccountSummaryDashboard />
+            </AuthRoute>} path="" />
+            <Route element={
+            <AuthRoute>
+              <CreatePost />
+            </AuthRoute>} path="create-post" />
+        </Route>
         <Route element={<PostsList />} path="/list-posts/" />
         {/* <Route element={<UpdatePost />} path="/posts/:id" /> */}
         <Route element={<PostDetails />} path="/posts/:id" />

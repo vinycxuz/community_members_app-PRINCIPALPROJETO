@@ -2,7 +2,11 @@ const asyncHandler = require('express-async-handler');
 const Post = require('../models/post/Post.model');
 
 const createPost = asyncHandler (async (req, res) => {
-  const postCreated = await Post.create(req.body);
+  const { description } = req.body;
+  const postCreated = await Post.create({
+    description,
+    author: req.user
+  });
   res.status(200).json(postCreated);
 });
 
