@@ -1,18 +1,39 @@
 const asyncHandler = require('express-async-handler');
 const Post = require('../models/post/Post.model');
+const Category = require('../models/category/Category.model');
 
 const createPost = asyncHandler (async (req, res) => {
-  const { description } = req.body;
+  const { description, category } = req.body;
+
+  const categoryFound = await Category.findById(category);
+  if (!categoryFound) {
+    throw new Error('Category not found');
+  }
   const postCreated = await Post.create({
     description,
-    author: req.user
+    author: req.user,
+    category
   });
+  categoryFound.posts.push(categoryFound?._id);
+
+  await categoryFound.save();
   res.status(200).json(postCreated);
 });
 
 const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
-  res.status(200).json(posts);
+  const {category, title, page=1, limit=10} = req.query;
+
+  let filter = {};
+  if (category) {
+    filter.category = category;
+  }
+  if (title) {
+    filter.description = { $regex: title, $options: 'i' };
+  }
+
+  const posts = await Post.find(filter).populate('category', 'categoryName').sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit);
+  const totalPosts = await Post.countDocuments(filter)
+  res.status(200).json({posts, totalPosts});
 });
 
 const updatePost = asyncHandler(async (req, res) => {
