@@ -1,12 +1,14 @@
 import { React, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import Select from 'react-select';
 
 import { createPost } from '../../../API/posts/postsAPI';
 import AlertMessage from '../../Alert/AlertMessage';
+import { getCategory } from '../../../API/categories/categoriesAPI';
 
 const CreatePost = () => {
 
@@ -19,19 +21,29 @@ const CreatePost = () => {
   const formik = useFormik({
     initialValues: {
       description: "",
+      category: ""
     },
     validationSchema: Yup.object({
       description: Yup.string().required("Description is required"),
+      category: Yup.string().required("Category is required")
     }),
     onSubmit: (values) => {
       const post = {
         description: values.description,
+        category: values.category,
       };
 
       console.log(post);
       postMutation.mutate(post);
     },
-});
+  });
+
+  const { data } = useQuery({
+    queryKey: ['get-categories'],
+    queryFn: getCategory,
+  });
+
+  console.log(data);
 
   const isLoading = postMutation.isPending;
 
@@ -87,10 +99,23 @@ const CreatePost = () => {
             >
               Category
             </label>
-            
-            {/* {formik.touched.category && formik.errors.category && (
+            <Select 
+              name='category'
+              options={data?.map((category) => {
+                return {
+                  value: category._id,
+                  label: category.categoryName
+                }
+              })}
+              onChange={(option) => {
+                return formik.setFieldValue("category", option.value);
+              }}
+              value={data?.find((option) => option.value === formik.values.category)}
+              className='mt-1 block w-full'
+            />
+            {formik.touched.category && formik.errors.category && (
               <p className="text-sm text-red-600">{formik.errors.category}</p>
-            )} */}
+            )}
           </div>
 
           

@@ -55,7 +55,7 @@ function App() {
               <AddCategory />
             </AuthRoute>} path="add-category" />
         </Route>
-        <Route element={<PostsList />} path="/list-posts/" />
+        <Route element={<PostsList />} path="/posts/" />
         {/* <Route element={<UpdatePost />} path="/posts/:id" /> */}
         <Route element={<PostDetails />} path="/posts/:id" />
         <Route element={<Login />} path="/user-login" />

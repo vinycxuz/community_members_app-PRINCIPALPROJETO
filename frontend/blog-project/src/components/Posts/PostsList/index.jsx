@@ -11,7 +11,7 @@ import "../post.style.css";
 
 const PostsList = () => {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
-    queryKey: ['list-posts'],
+    queryKey: ['posts'],
     queryFn: getPosts,
   });
 
