@@ -16,6 +16,10 @@ const planSchema = new mongoose.Schema({
   limitation: {
     type: String,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   {
     timestamps: true,

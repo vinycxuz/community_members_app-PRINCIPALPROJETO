@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const postsRouter = require('./router/postsRouter');
 const userRouter = require('./router/userRouter');
 const categoryRouter = require('./router/categoryRouter');
+const planRouter = require('./router/planRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +27,8 @@ app.use('/user', userRouter);
 app.use('/', postsRouter);
 
 app.use('/', categoryRouter);
+
+app.use('/', planRouter)
 
 dbConnect();
 
