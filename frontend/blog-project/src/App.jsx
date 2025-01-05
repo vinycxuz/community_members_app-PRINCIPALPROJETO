@@ -20,6 +20,7 @@ import AuthRoute from './components/Auth'
 import UserDashboard from './components/User/Dashboard'
 import AccountSummaryDashboard from './components/User/AccountSummary'
 import AddCategory from './components/Category'
+import CreatePlan from './components/Plan/CreatePlan'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -50,6 +51,10 @@ function App() {
             <AuthRoute>
               <CreatePost />
             </AuthRoute>} path="create-post" />
+            <Route element={
+            <AuthRoute>
+              <CreatePlan />
+            </AuthRoute>} path="add-plan" />
             <Route element={
             <AuthRoute>
               <AddCategory />
