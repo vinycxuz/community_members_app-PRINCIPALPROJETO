@@ -125,6 +125,11 @@ const userController = {
     res.clearCookie('secretToken');
     res.status(200).json({ message: 'Logout success' });
   }),
+
+  profile: asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user).populate('posts');
+    res.status(200).json(user);
+  }),
 };
 
 module.exports = userController;

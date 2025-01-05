@@ -8,20 +8,33 @@ import {
   FaFlag,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getUsersAPI } from "../../../API/users/usersAPI";
 
-const AccountSummaryDashboard = ({}) => {
+const AccountSummaryDashboard = () => {
 
-  const hasEmail = false;
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['profile'],
+    queryFn: getUsersAPI,
+  })
+  console.log(data);
 
-  const hasPlan = false;
+  const hasEmail = data?.email;
+  console.log(hasEmail);
 
-  const isEmailVerified = false;
+  const hasPlan = data?.hasSelectedPlan;
+  console.log(hasPlan);
 
-  const totalFollowers = 0;
+  const isEmailVerified = data?.isEmailVerified;
+  console.log(isEmailVerified);
 
-  const totalFollowing = 10;
+  const totalFollowers = data?.followers?.length;
+  console.log(totalFollowers);
 
-  const userPosts = 0;
+  const totalFollowing = data?.following?.length;
+  console.log(totalFollowing);
+
+  const userPosts = data?.posts;
 
   const totalViews = 0;
 
@@ -90,7 +103,7 @@ const AccountSummaryDashboard = ({}) => {
        font-bold text-2xl text-gray-800 mb-4
       "
       >
-        Welcome Back:Masynctech
+        Welcome Back: {data?.username}
       </p>
       {/* display account verification status */}
       {/* {mutation.isPending ? (

@@ -15,9 +15,8 @@ export const createPost = async (post) => {
 }
 
 export const getPosts = async (filters) => {
-    console.log(filters);
-    const posts = await axios.get(URL, {
-      params: filters,
+    const posts = await axios.get(URL,{
+      params: filters
     });
     return posts.data;
 }

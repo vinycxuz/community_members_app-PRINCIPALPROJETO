@@ -42,6 +42,11 @@ const PostsList = () => {
     refetch();
   }
 
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    refetch();
+  }
+
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
     queryKey: ['posts', {...filters, page}],
     queryFn: ()=> getPosts({...filters, title: searchTerm, page, limit: 10}),
@@ -116,7 +121,7 @@ const PostsList = () => {
             Clear Filters
           </button>
         </form>;
-        {data?.posts?.length === 0 && <NoDataFound />}
+
         <PostCategory
           categories={categories}
           onCategorySelect={handleCategoryFilter}
@@ -168,22 +173,21 @@ const PostsList = () => {
         </div>
       </div>
 
-      {/* Pagination */}
-      {/* <div className="flex justify-center items-center my-8 space-x-4">
-        {isPreviousButtonVisible && (
+      <div className="flex justify-center items-center my-8 space-x-4">
+        {page > 1 && (
           <button
             onClick={() => handlePageChange(page - 1)}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
           >
             Previous
           </button>
         )}
 
         <span className="text-sm font-semibold">
-          Page {page} of {postsData?.totalPages}
+          Page {page} of {data?.totalPages}
         </span>
 
-        {isNextButtonVisible && (
+        {page < data?.totalPages && (
           <button
             onClick={() => handlePageChange(page + 1)}
             className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
@@ -191,7 +195,7 @@ const PostsList = () => {
             Next
           </button>
         )}
-      </div> */}
+      </div>
     </section>
   );
 };
