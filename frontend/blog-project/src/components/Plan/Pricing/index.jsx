@@ -1,7 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
+import { getPlans } from "../../../API/plans/plansAPI";
 
 const Pricing = () => {
+  const { data } = useQuery({
+    queryKey: "pricing",
+    queryFn: getPlans,
+  }); 
+  
+  const freePlan = data?.filter((plan) => plan.planName === "Free")
+  console.log(freePlan)
+  const premiumPlan = data?.filter((plan) => plan.planName === "Premium")
+  console.log(premiumPlan)
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
@@ -19,7 +30,7 @@ const Pricing = () => {
             <div className="border border-gray-200 rounded-3xl px-8 lg:px-10 pb-14 pt-10 h-full">
               <h2 className="text-3xl font-bold font-heading mb-6">Free</h2>
               <div className="flex items-center gap-4 flex-wrap mb-6">
-                <h2 className="text-6xl font-bold font-heading">$ 0.0</h2>
+                <h2 className="text-6xl font-bold font-heading">{freePlan[0].price}</h2>
                 <p className="text-xl font-medium">per month</p>
               </div>
 
@@ -33,7 +44,7 @@ const Pricing = () => {
                 What you’ll get
               </h2>
               <ul className="flex flex-col gap-4">
-                {/* {freePlan?.[0]?.features?.map((feature) => {
+                {freePlan?.[0]?.features?.map((feature) => {
                   return (
                     <li key={feature} className="flex gap-4">
                       <div className="w-6 h-6">
@@ -55,21 +66,18 @@ const Pricing = () => {
                       <span>{feature}</span>
                     </li>
                   );
-                })} */}
+                })} 
               </ul>
             </div>
           </div>
-          {/* Premium plan */}
           <div className="w-full lg:w-1/2 p-4">
             <div className="bg-orange-500 rounded-3xl px-8 lg:px-10 pb-14 pt-10 h-full">
               <h2 className="text-white text-3xl font-bold font-heading mb-6">
-                {/* {premiumPlan?.[0]?.planName} */}
-                Premium
+                {premiumPlan?.[0]?.planName} 
               </h2>
               <div className="flex items-center gap-4 flex-wrap mb-6">
                 <h2 className="text-white text-6xl font-bold font-heading">
-                  {/* $ {premiumPlan?.[0]?.price} */}
-                  300
+                   {premiumPlan?.[0]?.price}
                 </h2>
                 <p className="text-white text-xl font-medium">Life Time</p>
               </div>
@@ -98,7 +106,7 @@ const Pricing = () => {
                 What you’ll get
               </h2>
               <ul className="flex flex-col gap-4">
-                {/* {premiumPlan?.[0]?.features?.map((feature) => {
+                {premiumPlan?.[0]?.features?.map((feature) => {
                   return (
                     <li key={feature} className="flex gap-4">
                       <div className="w-6 h-6">
@@ -120,7 +128,7 @@ const Pricing = () => {
                       <span className="text-white">{feature}</span>
                     </li>
                   );
-                })} */}
+                })} 
               </ul>
             </div>
           </div>

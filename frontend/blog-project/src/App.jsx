@@ -21,6 +21,7 @@ import UserDashboard from './components/User/Dashboard'
 import AccountSummaryDashboard from './components/User/AccountSummary'
 import AddCategory from './components/Category'
 import CreatePlan from './components/Plan/CreatePlan'
+import Pricing from './components/Plan/Pricing'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -65,6 +66,7 @@ function App() {
         <Route element={<PostDetails />} path="/posts/:id" />
         <Route element={<Login />} path="/user-login" />
         <Route element={<Register />} path="/user-register" />
+        <Route element={<Pricing />} path="/pricing" />
         <Route element={<AuthRoute>
                           <Profile />
                         </AuthRoute>} path="/profile" />
