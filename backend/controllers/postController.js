@@ -64,10 +64,15 @@ const updatePost = asyncHandler(async (req, res) => {
 
 const getPost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id);
+  const postFound = await Post.findById(post);
+  const userId = req.user
   if (!post) {
     return res.status(404).json({ message: 'Post not found' });
   }
-  res.status(200).json(post)
+  
+      postFound.viewsCount = postFound.viewsCount + 1;
+      await postFound.save();
+      res.status(200).json(post)
 });
 
 const deletePost = asyncHandler (async (req, res) => {
