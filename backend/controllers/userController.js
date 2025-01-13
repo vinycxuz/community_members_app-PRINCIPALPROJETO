@@ -130,6 +130,38 @@ const userController = {
     const user = await User.findById(req.user).populate('posts');
     res.status(200).json(user);
   }),
+
+  followUser: asyncHandler(async (req, res) => {
+    const userId = req.user;
+    const followId = req.params.followId;
+
+    await User.findByIdAndUpdate(userId, { $addToSet: { following: followId } }, { new: true });
+
+    await User.findByIdAndUpdate(followId, { $addToSet: { followers: userId } }, { new: true });
+
+    res.json({ message: 'User followed' });
+  }),
+
+  unFollowUser: asyncHandler(async (req, res) => {
+    const userId = req.user;
+    const unFollowId = req.params.followId;
+
+    const user = await User.findById(userId);
+    const unFollowUser = await User.findById(unFollowId);
+    
+    if(!user || !unFollowUser) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+    user.following.pull(unFollowId);
+    unFollowUser.followers.pull(userId);
+
+    await user.save();
+
+    await unFollowUser.save();
+
+    res.json({ message: 'User unfollowed' });
+  })
 };
 
 module.exports = userController;
