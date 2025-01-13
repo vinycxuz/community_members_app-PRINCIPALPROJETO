@@ -47,3 +47,18 @@ export const getUsersAPI = async () => {
   });
   return response.data;
 }
+
+export const userFollowAPI = async (userId) => {
+  const response = await axios.put(`http://localhost:3000/user/follow/${userId}`, {}, {
+    withCredentials: true
+  });
+  return response.data;
+}
+
+
+export const userUnfollowAPI = async (userId) => {
+  const response = await axios.put(`http://localhost:3000/user/unfollow/${userId}`, {},{
+    withCredentials: true
+  });
+  return response.data;
+}

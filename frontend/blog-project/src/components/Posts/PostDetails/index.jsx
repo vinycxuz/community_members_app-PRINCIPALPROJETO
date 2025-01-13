@@ -8,9 +8,12 @@ import {
   FaTrashAlt,
   FaComment,
 } from "react-icons/fa";
-import { useQuery } from '@tanstack/react-query';
+import { RiUserFollowLine, RiUserUnfollowFill } from "react-icons/ri";
+import { useQuery, useMutation } from '@tanstack/react-query';
 import * as Yup from "yup";
 import { getPost } from '../../../API/posts/postsAPI';
+import { getUsersAPI, userFollowAPI, userUnfollowAPI } from '../../../API/users/usersAPI';
+
 
 const PostDetails = () => {
   const [comment, setComment] = useState("");
@@ -21,7 +24,46 @@ const PostDetails = () => {
     queryKey: ['post-details'],
     queryFn: () => getPost(id),
   });
-  console.log(data);
+
+  const { data: profileData, refetch: refetchProfile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => getUsersAPI(),
+  });
+
+  const userId = profileData?._id;
+  const authorId = data?.author;
+  const isFollowing = profileData?.following?.find((user) => user?.toString() === authorId?.toString());
+
+  console.log(authorId)
+  console.log(profileData)
+  console.log(userId)
+
+  const followUserMutation = useMutation({
+    mutationKey: ['follow-user'],
+    mutationFn: userFollowAPI,
+  })
+
+  const followUserHandler = async () => {
+    followUserMutation
+    .mutateAsync(authorId)
+    .then(() => {
+      refetchProfile()
+    }).catch(() => {})
+  }
+
+  const unfollowUserMutation = useMutation({
+    mutationKey: ['unfollow-user'],
+    mutationFn: userUnfollowAPI,
+  })
+
+  const unfollowUserHandler = async () => {
+    unfollowUserMutation
+    .mutateAsync(authorId)
+    .then(() => {
+      refetchProfile()
+    }).catch(() => {})
+  }
+
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white rounded-lg shadow-lg p-5">
@@ -57,10 +99,9 @@ const PostDetails = () => {
             {/* {postData?.viewsCount || 0} */}
           </span>
         </div>
-        {/* follow icon */}
-        {/* {isFollowing ? (
+        {isFollowing ? (
           <button
-            onClick={handleFollow}
+            onClick={unfollowUserHandler}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
           >
             <RiUserUnfollowFill className="mr-2" />
@@ -68,13 +109,13 @@ const PostDetails = () => {
           </button>
         ) : (
           <button
-            onClick={handleFollow}
+            onClick={followUserHandler}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
           >
             Follow
             <RiUserFollowLine className="ml-2" />
           </button>
-        )} */}
+        )}
 
         {/* author */}
         <span className="ml-2">{/* {postData?.author?.username} */}</span>

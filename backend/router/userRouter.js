@@ -13,6 +13,6 @@ userRouter.get('/check-authenticated', userController.checkAuthenticated);
 userRouter.post('/logout', userController.logout);
 userRouter.get('/profile', authVerification, userController.profile);
 userRouter.put('/follow/:followId', authVerification, userController.followUser);
-userRouter.put('/unfollow/:unfollowId', authVerification, userController.unFollowUser);
+userRouter.put('/unfollow/:unfollowId', authVerification, userController.unfollowUser);
 
 module.exports = userRouter;

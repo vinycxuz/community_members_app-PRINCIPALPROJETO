@@ -142,12 +142,15 @@ const userController = {
     res.json({ message: 'User followed' });
   }),
 
-  unFollowUser: asyncHandler(async (req, res) => {
+  unfollowUser: asyncHandler(async (req, res) => {
     const userId = req.user;
-    const unFollowId = req.params.followId;
+    const unFollowId = req.params.unfollowId;
 
     const user = await User.findById(userId);
     const unFollowUser = await User.findById(unFollowId);
+
+    console.log(userId)
+    console.log(unFollowId)
     
     if(!user || !unFollowUser) {
       res.status(404);
