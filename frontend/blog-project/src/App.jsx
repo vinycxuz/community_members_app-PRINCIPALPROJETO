@@ -22,6 +22,7 @@ import AccountSummaryDashboard from './components/User/AccountSummary'
 import AddCategory from './components/Category'
 import CreatePlan from './components/Plan/CreatePlan'
 import Pricing from './components/Plan/Pricing'
+import CheckoutForm from './components/Plan/CheckoutForm'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -67,6 +68,7 @@ function App() {
         <Route element={<Login />} path="/user-login" />
         <Route element={<Register />} path="/user-register" />
         <Route element={<Pricing />} path="/pricing" />
+        <Route element={<CheckoutForm />} path="/checkout/:planId" />
         <Route element={<AuthRoute>
                           <Profile />
                         </AuthRoute>} path="/profile" />

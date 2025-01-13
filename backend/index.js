@@ -9,6 +9,7 @@ const postsRouter = require('./router/postsRouter');
 const userRouter = require('./router/userRouter');
 const categoryRouter = require('./router/categoryRouter');
 const planRouter = require('./router/planRouter');
+const paymentRouter = require('./router/paymentRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +29,9 @@ app.use('/', postsRouter);
 
 app.use('/', categoryRouter);
 
-app.use('/', planRouter)
+app.use('/', planRouter);
+
+app.use('/', paymentRouter);
 
 dbConnect();
 
