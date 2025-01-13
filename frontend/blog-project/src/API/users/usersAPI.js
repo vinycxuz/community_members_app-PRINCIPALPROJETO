@@ -40,3 +40,10 @@ export const checkAuthStatusAPI = async () => {
   });
   return response.data;
 }
+
+export const getUsersAPI = async () => {
+  const response = await axios.get('http://localhost:3000/user/profile', {
+    withCredentials: true
+  });
+  return response.data;
+}

@@ -1,18 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { deletePost, getPosts } from '../../../API/posts/postsAPI';
 import { Link } from 'react-router-dom';
 
 import AlertMessage from '../../Alert/AlertMessage';
 import NoDataFound from '../../Alert/NoDataFound';
+import PostCategory from '../../Category/PostCategory';
 
-
+import { getCategory } from '../../../API/categories/categoriesAPI';
 import "../post.style.css";
 
+import { FaSearch } from 'react-icons/fa';
+import { MdClear } from 'react-icons/md';
+
 const PostsList = () => {
+  const [filters, setFilters] = useState({})
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleCategoryFilter = (categoryId) => {
+    setFilters({ ...filters, category: categoryId });
+    setPage(1);
+    refetch();
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  }
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setFilters({ ...filters, title: searchTerm });
+    setPage(1);
+    refetch();
+  }
+
+  const clearFilters = () => {
+    setFilters({});
+    setSearchTerm('');
+    setPage(1);
+    refetch();
+  }
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    refetch();
+  }
+
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
-    queryKey: ['list-posts'],
-    queryFn: getPosts,
+    queryKey: ['posts', {...filters, page}],
+    queryFn: ()=> getPosts({...filters, title: searchTerm, page, limit: 10}),
   });
 
   const postMutation = useMutation({
@@ -30,7 +67,12 @@ const PostsList = () => {
     });
 
   }; */
-  console.log(data)
+  
+  const { data: categories } = useQuery({
+    queryKey: ['categories-list'],
+    queryFn: getCategory,
+  });
+
   if (isLoading) {
     return <AlertMessage type='loading' message='Loading '/>;
   }
@@ -44,7 +86,7 @@ const PostsList = () => {
     <section className="overflow-hidden">
       <div className="container px-4 mx-auto">
         <h1 className="text-4xl lg:text-6xl font-bold font-heading mb-6 mt-16">
-          Blog
+          Blog {console.log(filters)}
         </h1>
 
         {/* featured post */}
@@ -52,14 +94,41 @@ const PostsList = () => {
         <h2 className="text-4xl font-bold font-heading mb-10">
           Latest articles
         </h2>
-        {/* Post category */}
-        {/* <PostCategory
-          categories={categoriesData}
+        <form
+          onSubmit={handleSearchSubmit}
+          className="flex flex-col md:flex-row items-center gap-2 mb-4"
+        >
+          <div className="flex-grow flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <input
+              type="text"
+              placeholder="Search posts..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="flex-grow p-2 text-sm focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="p-2 text-white bg-orange-500 hover:bg-blue-600 rounded-r-lg"
+            >
+              <FaSearch className="h-5 w-5" />
+            </button>
+          </div>
+          <button
+            onClick={clearFilters}
+            className="p-2 text-sm text-orange-500 border border-blue-500 rounded-lg hover:bg-blue-100 flex items-center gap-1"
+          >
+            <MdClear className="h-4 w-4" />
+            Clear Filters
+          </button>
+        </form>;
+
+        <PostCategory
+          categories={categories}
           onCategorySelect={handleCategoryFilter}
-        /> */}
+          onClearFilters={clearFilters}
+        />
         <div className="flex flex-wrap mb-32 -mx-4">
-          {/* Posts */}
-          {data?.map((post) => (
+          {data?.posts?.map((post) => (
             <div key={post._id} className="w-full md:w-1/2 lg:w-1/3 p-4">
               <Link to={`/posts/${post._id}`}>
                 <div className="bg-white border border-gray-100 hover:border-orange-500 transition duration-200 rounded-2xl h-full p-3">
@@ -93,7 +162,7 @@ const PostsList = () => {
                         <circle cx={2} cy={2} r={2} fill="#B8B8B8" />
                       </svg>
                       <div className="py-1 px-2 rounded-md border border-gray-100 text-xs font-medium text-gray-700 inline-block">
-                        {/* {post?.category?.categoryName} */}
+                        {post?.category?.categoryName}
                       </div>
                     </div>
                   </div>
@@ -104,22 +173,21 @@ const PostsList = () => {
         </div>
       </div>
 
-      {/* Pagination */}
-      {/* <div className="flex justify-center items-center my-8 space-x-4">
-        {isPreviousButtonVisible && (
+      <div className="flex justify-center items-center my-8 space-x-4">
+        {page > 1 && (
           <button
             onClick={() => handlePageChange(page - 1)}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
           >
             Previous
           </button>
         )}
 
         <span className="text-sm font-semibold">
-          Page {page} of {postsData?.totalPages}
+          Page {page} of {data?.totalPages}
         </span>
 
-        {isNextButtonVisible && (
+        {page < data?.totalPages && (
           <button
             onClick={() => handlePageChange(page + 1)}
             className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
@@ -127,7 +195,7 @@ const PostsList = () => {
             Next
           </button>
         )}
-      </div> */}
+      </div>
     </section>
   );
 };

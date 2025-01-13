@@ -38,7 +38,7 @@ const Login = () => {
         .catch((err) => console.log(err));
     },
   });
-  console.log(userMutation);
+  
   return (
     <div className="flex flex-wrap pb-24">
       <div className="w-full  p-4">
@@ -52,9 +52,7 @@ const Login = () => {
               <span />
               <span className="font-bold font-heading">Register</span>
             </Link>
-            {/* show message */}
-            {/* show alert */}
-
+      
             {userMutation.isPending && (
               <AlertMessage type="loading" message="Loading please wait..." />
             )}

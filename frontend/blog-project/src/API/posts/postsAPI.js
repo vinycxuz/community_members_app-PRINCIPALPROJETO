@@ -1,17 +1,23 @@
 import axios  from 'axios';
 
-const URL = 'http://localhost:3000/api/posts/create';
+const URL = 'http://localhost:3000/api/posts';
 
 export const createPost = async (post) => {
     console.log(post);
-    const response = await axios.post(URL, {
+    const response = await axios.post(`${URL}/create`, {
       description: post.description,
+      category: post.category,
+    },
+    {
+      withCredentials: true
     });
     return response.data;    
 }
 
-export const getPosts = async () => {
-    const posts = await axios.get('http://localhost:3000/api/posts');
+export const getPosts = async (filters) => {
+    const posts = await axios.get(URL,{
+      params: filters
+    });
     return posts.data;
 }
 
