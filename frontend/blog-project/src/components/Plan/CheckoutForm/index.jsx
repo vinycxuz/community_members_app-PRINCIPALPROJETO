@@ -38,7 +38,7 @@ const CheckoutForm = () => {
           elements,
           clientSecret: checkoutMutation.data?.clientSecret,
           confirmParams: {
-            return_url: 'http://locahost:5173/sucess',
+            return_url: 'http://localhost:5173/success',
           },
         })
         setErrorMessage(error?.message);

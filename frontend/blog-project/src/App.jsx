@@ -23,6 +23,8 @@ import AddCategory from './components/Category'
 import CreatePlan from './components/Plan/CreatePlan'
 import Pricing from './components/Plan/Pricing'
 import CheckoutForm from './components/Plan/CheckoutForm'
+import PaymentSuccess from './components/Plan/PaymentSucess'
+import PayingFreePlan from './components/Plan/PayingFreePlan'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -70,8 +72,14 @@ function App() {
         <Route element={<Pricing />} path="/pricing" />
         <Route element={<CheckoutForm />} path="/checkout/:planId" />
         <Route element={<AuthRoute>
-                          <Profile />
-                        </AuthRoute>} path="/profile" />
+          <Profile />
+        </AuthRoute>} path="/profile" />
+        <Route element={<AuthRoute>
+          <PaymentSuccess />
+        </AuthRoute>} path="/success" />
+        <Route element={<AuthRoute>
+          <PayingFreePlan />
+        </AuthRoute>} path="/free-subscription" />
       </Routes>
     </BrowserRouter>
   )

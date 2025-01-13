@@ -13,4 +13,20 @@ export const paymentIntent = async (planId) => {
     return response.data;    
 }
 
+export const paymentVerification = async (paymentId) => {
+  const response = await axios.get(`${URL}/verify/${paymentId}`, 
+    {
+      withCredentials: true
+    }
+  )
+  return response.data;
+}
 
+export const freePaymentVerification = async () => {
+  const response = await axios.get(`${URL}/free`, 
+    {
+      withCredentials: true
+    }
+  )
+  return response.data;
+}

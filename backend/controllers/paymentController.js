@@ -48,9 +48,9 @@ const verifyPayment = asyncHandler(async (req, res) => {
   if(paymentIntent.status !== 'succeess') {
     const metada = paymentIntent?.metadata;
     const subscriptionPlanId = metada?.subscriptionPlanId;
-    const userId = metada?.userId;
+    const userId = metada.userId;
     
-    const userFound = User.findById(userId);
+    const userFound = await User.findById(userId);
     if(!userFound){
       return res.status(404).json({ message: 'User not found' });
     }
@@ -61,17 +61,36 @@ const verifyPayment = asyncHandler(async (req, res) => {
     const newPayment = await Payment.create({
       user: userId,
       subscriptionPlan: subscriptionPlanId,
-      status: 'sucess',
+      status: 'success',
       amount,
       currency,
+      reference: paymentId,
     });
 
     if(newPayment){
       userFound.hasSelectedPlan = true;
       userFound.plan = subscriptionPlanId;
       await userFound.save();
-      return res.status(201).json({ message: 'Payment verified' });
     }
+    return res.status(201).json({
+      message: 'Payment verified',
+      status: true,
+      userFound,
+     });
   }
 });
-module.exports = { payment, verifyPayment };
+
+const freePayment = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if(!user){
+    return res.status(404).json({ message: 'User not found' });
+  }
+  user.hasSelectedPlan = true;
+  await user.save();
+  res.json({ 
+    message: 'Free plan activated',
+    status: true,
+  });
+});
+
+module.exports = { payment, verifyPayment, freePayment };

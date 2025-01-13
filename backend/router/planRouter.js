@@ -3,8 +3,9 @@ const planRouter = express.Router();
 
 const planController = require('../controllers/planController');
 const authVerification = require('../middleware/AuthVerification');
+const checkUserPlan = require('../middleware/checkUserPlan');
 
-planRouter.post('/api/plan/create', authVerification, planController.createPlan);
+planRouter.post('/api/plan/create', authVerification, checkUserPlan, planController.createPlan);
 
 planRouter.get('/api/plan', planController.getPlans);
 
