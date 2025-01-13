@@ -19,4 +19,8 @@ postRouter.get('/api/posts/:id', postController.getPost);
 
 postRouter.delete('/api/posts/delete/:id', authVerification, postController.deletePost);
 
+postRouter.put('/api/posts/like/:id', authVerification, postController.likePost);
+
+postRouter.put('/api/posts/dislike/:id', authVerification, postController.dislikePost);
+
 module.exports = postRouter;

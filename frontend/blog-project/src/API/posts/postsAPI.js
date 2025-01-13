@@ -39,3 +39,19 @@ export const deletePost = async (id) => {
   const posts = await axios.delete(`http://localhost:3000/api/posts/delete/${id}`);
   return posts.data;
 }
+
+export const likePost = async (postId) => {
+  const response = await axios.put(`http://localhost:3000/api/posts/like/${postId}`, {},
+  {
+    withCredentials: true
+  });
+  return response.data;    
+}
+
+export const dislikePost = async (postId) => {
+  const response = await axios.put(`http://localhost:3000/api/posts/dislike/${postId}`, {},
+  {
+    withCredentials: true
+  });
+  return response.data;    
+}

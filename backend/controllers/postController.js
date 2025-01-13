@@ -79,4 +79,47 @@ const deletePost = asyncHandler (async (req, res) => {
   res.status(200).json({ message: 'Post deleted' });
 });
 
-module.exports = { createPost, getPosts, updatePost, getPost, deletePost };
+const likePost = asyncHandler (async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user;
+  const post = await Post.findById(postId);
+
+  if(post?.dislikes.includes(userId)) {
+    post?.dislikes?.pull(userId);
+  }
+
+  if(post?.likes.includes(userId)) {
+    post?.likes?.pull(userId);
+  } else {
+    post?.likes?.push(userId);
+  }
+  await post.save();
+
+  res.json({
+    message: "Post Liked"
+  })
+})
+
+const dislikePost = asyncHandler (async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user;
+  const post = await Post.findById(postId);
+
+  if(post?.likes.includes(userId)) {
+    post?.likes?.pull(userId);
+  }
+
+  if(post?.dislikes.includes(userId)) {
+    post?.dislikes?.pull(userId);
+  } else {
+    post?.dislikes?.push(userId);
+  }
+
+  await post.save();
+
+  res.json({
+    message: "Post Disliked"
+  })
+})
+
+module.exports = { createPost, getPosts, updatePost, getPost, deletePost, likePost, dislikePost }; 

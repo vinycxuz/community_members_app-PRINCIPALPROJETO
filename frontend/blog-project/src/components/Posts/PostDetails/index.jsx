@@ -11,7 +11,7 @@ import {
 import { RiUserFollowLine, RiUserUnfollowFill } from "react-icons/ri";
 import { useQuery, useMutation } from '@tanstack/react-query';
 import * as Yup from "yup";
-import { getPost } from '../../../API/posts/postsAPI';
+import { getPost, likePost, dislikePost } from '../../../API/posts/postsAPI';
 import { getUsersAPI, userFollowAPI, userUnfollowAPI } from '../../../API/users/usersAPI';
 
 
@@ -20,7 +20,7 @@ const PostDetails = () => {
 
   const { id }  = useParams();
 
-  const { isLoading, data, error, isSuccess } = useQuery({
+  const { isLoading, data, error, isSuccess, refetch: refetchPost } = useQuery({
     queryKey: ['post-details'],
     queryFn: () => getPost(id),
   });
@@ -33,10 +33,10 @@ const PostDetails = () => {
   const userId = profileData?._id;
   const authorId = data?.author;
   const isFollowing = profileData?.following?.find((user) => user?.toString() === authorId?.toString());
+  const postId = data?._id;
 
-  console.log(authorId)
-  console.log(profileData)
-  console.log(userId)
+  console.log(postId)
+  console.log(data)
 
   const followUserMutation = useMutation({
     mutationKey: ['follow-user'],
@@ -64,6 +64,32 @@ const PostDetails = () => {
     }).catch(() => {})
   }
 
+  const likePostMutation = useMutation({
+    mutationKey: ['like-post'],
+    mutationFn: likePost,
+  })
+
+  const likePostHandler = async () => {
+    likePostMutation
+    .mutateAsync(postId)
+    .then(() => {
+      refetchPost()
+    }).catch(() => {})
+  }
+
+  const dislikePostMutation = useMutation({
+    mutationKey: ['unfollow-user'],
+    mutationFn: dislikePost,
+  })
+
+  const dislikePostHandler = async () => {
+    dislikePostMutation
+    .mutateAsync(postId)
+    .then(() => {
+      refetchPost()
+    }).catch(() => {})
+  }
+
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white rounded-lg shadow-lg p-5">
@@ -72,28 +98,22 @@ const PostDetails = () => {
           // alt={postData?._id}
           className="w-full h-full object-cover rounded-lg mb-4"
         />
-        {/* Show messages */}
-
         <div className="flex gap-4 items-center mb-4">
-          {/* like icon */}
           <span
             className="flex items-center gap-1 cursor-pointer"
-            // onClick={handleLike}
+            onClick={likePostHandler}
           >
             <FaThumbsUp />
-            {/* {postData?.likes?.length || 0} */}
+            {data?.likes?.length || 0}
           </span>
-
-          {/* Dislike icon */}
           <span
             className="flex items-center gap-1 cursor-pointer"
-            // onClick={handleDislike}
+            onClick={dislikePostHandler}
           >
             <FaThumbsDown />
 
-            {/* {postData?.dislikes?.length || 0} */}
+             {data?.dislikes?.length || 0} 
           </span>
-          {/* views icon */}
           <span className="flex items-center gap-1">
             <FaEye />
             {/* {postData?.viewsCount || 0} */}
