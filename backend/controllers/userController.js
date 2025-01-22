@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const secretToken = require('../utils/secretToken');
 const sendAccountVerification = require('../utils/sendAccountVerification');
 const crypto = require('crypto');
+const sendResetPassowrd = require('../utils/sendResetPassword');
 
 dotenv.config();
 
@@ -225,7 +226,7 @@ const userController = {
       throw new Error('User not found');
     }
 
-    const token = await user.passwordResetToken();
+    const token = await user.generatePasswordResetToken();
 
     await user.save()
 
