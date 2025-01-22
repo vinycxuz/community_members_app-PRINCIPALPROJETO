@@ -105,4 +105,13 @@ userSchema.methods.generateAccountVerificationToken = function () {
   return token;
 };
 
+userSchema.methods.generatePasswordResetToken = function () {
+  const passwordToken = crypto.randomBytes(20).toString('hex');
+
+  this.accountVerificationToken = crypto.createHash('sha256').update(passwordToken).digest('hex');
+  this.generateAccountVerificationExpires = Date.now() + 10 * 60 * 1000;
+
+  return passwordToken;
+};
+
 module.exports = mongoose.model('User', userSchema);
