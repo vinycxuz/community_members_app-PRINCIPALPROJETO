@@ -210,7 +210,54 @@ const userController = {
 
     await userFound.save();
     res.status(200).json({ message: 'Account verified' });
-  })  
+  }),
+  
+  resetPassword: asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({email});
+    if (!user) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+    if(user.authMethod !== 'local') {
+      res.status(400);
+      throw new Error('User not found');
+    }
+
+    const token = await user.passwordResetToken();
+
+    await user.save()
+
+    sendResetPassowrd(user?.email, token);
+
+    return res.status(200).json({ message: 'Reset your password link was sent your e-mail', token });
+  }),
+
+  verifyPassword: asyncHandler(async (req, res) => {
+    const {verifyToken} = req.params
+    const { password } = req.body;
+
+    const cryptoToken = crypto.createHash('sha256').update(verifyToken).digest('hex');
+
+    const userFound = await User.findOne({ 
+      passwordResetToken: cryptoToken,
+      passwordResetExpires: { $gt: Date.now() }
+    });
+    if (!userFound) {
+      res.status(400);
+      throw new Error('Invalid or expired token');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    userFound.password = await bcrypt.hash(password, salt);
+    userFound.passwordResetToken = null;
+    userFound.passwordResetExpires = null;
+
+    await userFound.save();
+    res.status(200).json({ message: 'Password Sucessfully Reset' });
+  }),
   };
 
 module.exports = userController;

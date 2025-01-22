@@ -16,5 +16,6 @@ userRouter.put('/follow/:followId', authVerification, userController.followUser)
 userRouter.put('/unfollow/:unfollowId', authVerification, userController.unfollowUser);
 userRouter.put('/email-verification', authVerification, userController.verifyEmailAccount);
 userRouter.put('/user-verification/:verifyToken', authVerification, userController.verifyUserAccount);
+userRouter.put('/reset-password/', userController.resetPassword);
 
 module.exports = userRouter;
