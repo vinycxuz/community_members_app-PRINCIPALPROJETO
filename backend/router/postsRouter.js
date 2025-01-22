@@ -6,10 +6,12 @@ const cloudinaryConfig = require('../utils/fileUpload');
 // cloudinaryConfig.cloudinaryConfig();
 
 const authVerification = require('../middleware/AuthVerification');
+const checkUserPlan = require('../middleware/checkUserPlan');
+const isAccountVerified = require('../middleware/isAccountVerified');
 
 const postController = require('../controllers/postController');
 
-postRouter.post('/api/posts/create', authVerification, postController.createPost);
+postRouter.post('/api/posts/create', authVerification, checkUserPlan, isAccountVerified, postController.createPost);
 
 postRouter.get('/api/posts', postController.getPosts);
 

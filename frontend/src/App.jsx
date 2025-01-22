@@ -25,6 +25,7 @@ import Pricing from './components/Plan/Pricing'
 import CheckoutForm from './components/Plan/CheckoutForm'
 import PaymentSuccess from './components/Plan/PaymentSucess'
 import PayingFreePlan from './components/Plan/PayingFreePlan'
+import AccountVerification from './components/User/AccountVerification'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -63,6 +64,11 @@ function App() {
             <AuthRoute>
               <AddCategory />
             </AuthRoute>} path="add-category" />
+            <Route element={
+            <AuthRoute>
+              <AccountVerification />
+            </AuthRoute>} path="account-verification/:verifyToken" />
+            
         </Route>
         <Route element={<PostsList />} path="/posts/" />
         {/* <Route element={<UpdatePost />} path="/posts/:id" /> */}

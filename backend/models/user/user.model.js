@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -94,5 +95,14 @@ const userSchema = new mongoose.Schema({
   ],
   }, { timestamps: true }
 );
+
+userSchema.methods.generateAccountVerificationToken = function () {
+  const token = crypto.randomBytes(20).toString('hex');
+
+  this.accountVerificationToken = crypto.createHash('sha256').update(token).digest('hex');
+  this.generateAccountVerificationExpires = Date.now() + 10 * 60 * 1000;
+
+  return token;
+};
 
 module.exports = mongoose.model('User', userSchema);

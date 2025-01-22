@@ -5,6 +5,8 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const secretToken = require('../utils/secretToken');
+const sendAccountVerification = require('../utils/sendAccountVerification');
+const crypto = require('crypto');
 
 dotenv.config();
 
@@ -164,7 +166,51 @@ const userController = {
     await unFollowUser.save();
 
     res.json({ message: 'User unfollowed' });
-  })
-};
+  }),
+
+  verifyEmailAccount: asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user);
+    if (!user) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+    if(!user?.email) {
+      res.status(400);
+      throw new Error('Email not found');
+    }
+
+    const token = await user.accountVerificationToken();
+
+    await user.save()
+
+    sendAccountVerification(user?.email, token);
+
+    return res.status(200).json({ message: 'Email verification sent', token });
+  }),
+
+  verifyUserAccount: asyncHandler(async (req, res) => {
+    const {verifyToken} = req.params
+    console.log(verifyToken)
+
+    const cryptoToken = crypto.createHash('sha256').update(verifyToken).digest('hex');
+
+    const userFound = await User.findOne({ 
+      accountVerificationToken: cryptoToken,
+      accountVerificationTokenExpires: { $gt: Date.now() }
+    });
+    if (!userFound) {
+      res.status(400);
+      throw new Error('Invalid or expired token');
+    }
+
+    userFound.isEmailVerified = true;
+    userFound.accountVerificationToken = null;
+    userFound.accountVerificationExpires = null;
+
+    await userFound.save();
+    res.status(200).json({ message: 'Account verified' });
+  })  
+  };
 
 module.exports = userController;

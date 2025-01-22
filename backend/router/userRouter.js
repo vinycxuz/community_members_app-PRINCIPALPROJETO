@@ -14,5 +14,7 @@ userRouter.post('/logout', userController.logout);
 userRouter.get('/profile', authVerification, userController.profile);
 userRouter.put('/follow/:followId', authVerification, userController.followUser);
 userRouter.put('/unfollow/:unfollowId', authVerification, userController.unfollowUser);
+userRouter.put('/email-verification', authVerification, userController.verifyEmailAccount);
+userRouter.put('/user-verification/:verifyToken', authVerification, userController.verifyUserAccount);
 
 module.exports = userRouter;

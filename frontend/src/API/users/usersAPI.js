@@ -55,9 +55,22 @@ export const userFollowAPI = async (userId) => {
   return response.data;
 }
 
-
 export const userUnfollowAPI = async (userId) => {
   const response = await axios.put(`http://localhost:3000/user/unfollow/${userId}`, {},{
+    withCredentials: true
+  });
+  return response.data;
+}
+
+export const sendEmailVerificationTokenAPI = async () => {
+  const response = await axios.put('http://localhost:3000/user/email-verification', {}, {
+    withCredentials: true
+  });
+  return response.data;
+}
+
+export const verifyUserAccountAPI = async (verifyToken) => {
+  const response = await axios.put(`http://localhost:3000/user/user-verification/${verifyToken}`, {}, {
     withCredentials: true
   });
   return response.data;
