@@ -75,3 +75,21 @@ export const verifyUserAccountAPI = async (verifyToken) => {
   });
   return response.data;
 }
+
+export const forgotPasswordAPI = async (email) => {
+  const response = await axios.put(`http://localhost:3000/user/forgot-password`, {
+    email
+  }, {
+    withCredentials: true
+  });
+  return response.data;
+}
+
+export const verifyPasswordAPI = async (password) => {
+  const response = await axios.put(`http://localhost:3000/user/reset-password/:verifyToken`, {
+    password
+  }, {
+    withCredentials: true
+  });
+  return response.data;
+}

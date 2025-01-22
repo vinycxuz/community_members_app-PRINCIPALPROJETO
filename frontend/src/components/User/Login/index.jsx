@@ -158,6 +158,9 @@ const Login = () => {
                 Sign in with Google
               </span>
             </a>
+            <Link to="/forgot-password" className="text-gray-500">
+                Forgot Password?
+              </Link>
           </form>
         </div>
       </div>
