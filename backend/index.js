@@ -1,4 +1,5 @@
 const express = require('express');
+const cron = require('node-cron');
 const dbConnect = require('./utils/dbConnect');
 const app = express();
 const cors = require('cors');
@@ -10,6 +11,9 @@ const userRouter = require('./router/userRouter');
 const categoryRouter = require('./router/categoryRouter');
 const planRouter = require('./router/planRouter');
 const paymentRouter = require('./router/paymentRouter');
+const calculatedEarnings = require('./utils/calculateEarnings');
+
+calculatedEarnings();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
