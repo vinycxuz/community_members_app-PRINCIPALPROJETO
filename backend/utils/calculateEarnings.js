@@ -1,13 +1,13 @@
-const Earnings = require('../models/earnings');
-const Post = require('../models/post');
+const Earnings = require('../models/earning/Earning.model');
+const Post = require('../models/post/Post.model');
 
 const calculateEarnings = async () => {
-  const currentDate= new Date.now();
+  const currentDate = new Date();
 
   const posts = await Post.find();
 
   for(const post of posts) {
-    const newViewsCount = post.views.length - post.lastViewsCount;
+    const newViewsCount = post.viewers.length - post.lastCalculatedViewsCount;
     const earningsAmount = newViewsCount * 0.01;
 
     post.thisMonthEarnings += earningsAmount;
@@ -20,7 +20,7 @@ const calculateEarnings = async () => {
       calculatedOn: currentDate,
     })
 
-    post.lastCalculatedViewsCount = post.viewrs.length;
+    post.lastCalculatedViewsCount = post.viewers.length;
     post.nextEarningDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
 
     await post.save()

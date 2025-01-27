@@ -66,6 +66,13 @@ const getPost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id);
   const postFound = await Post.findById(post);
   const userId = req.user
+  if (userId){
+    await Post.findByIdAndUpdate(req.params.id, {
+      $addToSet: 
+        {viewers: userId},
+      $inc: {viewsCount: 1}
+    }, {new: true})
+  }
   if (!post) {
     return res.status(404).json({ message: 'Post not found' });
   }

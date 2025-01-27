@@ -116,7 +116,7 @@ const PostDetails = () => {
           </span>
           <span className="flex items-center gap-1">
             <FaEye />
-            {data?.viewsCount || 0}
+            {data?.viewers?.length || 0}
           </span>
         </div>
         {isFollowing ? (

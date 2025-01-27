@@ -22,7 +22,9 @@ export const getPosts = async (filters) => {
 }
 
 export const getPost = async (id) => {
-  const posts = await axios.get(`http://localhost:3000/api/posts/${id}`);
+  const posts = await axios.get(`http://localhost:3000/api/posts/${id}`, {
+    withCredentials: true
+  });
   return posts.data;
 }
 

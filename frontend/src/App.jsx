@@ -28,6 +28,7 @@ import PayingFreePlan from './components/Plan/PayingFreePlan'
 import AccountVerification from './components/User/AccountVerification'
 import RequestResetPassword from './components/User/RequestResetPassowrd'
 import ResetPassword from './components/User/ResetPassword'
+import Rankings from './components/User/CreatorsRanking'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -81,6 +82,7 @@ function App() {
         <Route element={<CheckoutForm />} path="/checkout/:planId" />
         <Route element={<RequestResetPassword />} path="/forgot-password" />
         <Route element={<ResetPassword />} path="/reset-password/:verifyToken" />
+        <Route element={<Rankings />} path="/ranking" />
         <Route element={<AuthRoute>
           <Profile />
         </AuthRoute>} path="/profile" />
