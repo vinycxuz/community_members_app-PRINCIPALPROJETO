@@ -93,11 +93,11 @@ const PostDetails = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white rounded-lg shadow-lg p-5">
-        <img
+        {/*<img
           src="https://cdn.pixabay.com/photo/2023/12/19/15/51/flowers-8457960_1280.jpg"
           // alt={postData?._id}
           className="w-full h-full object-cover rounded-lg mb-4"
-        />
+        />*/}
         <div className="flex gap-4 items-center mb-4">
           <span
             className="flex items-center gap-1 cursor-pointer"
@@ -138,7 +138,7 @@ const PostDetails = () => {
         )}
 
         {/* author */}
-        <span className="ml-2">{/* {postData?.author?.username} */}</span>
+        <span className="ml-2"> </span>
 
         {/* post details */}
         <div className="flex justify-between items-center mb-3">
@@ -146,7 +146,7 @@ const PostDetails = () => {
             className="rendered-html-content mb-2"
             dangerouslySetInnerHTML={{ __html: data?.postFound?.description }}
           />
-
+          
           {/* Edit delete icon */}
           <div className="flex gap-2">
             <FaEdit className="text-blue-500 cursor-pointer" />

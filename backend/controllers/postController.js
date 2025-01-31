@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Post = require('../models/post/Post.model');
 const Category = require('../models/category/Category.model');
 const User = require('../models/user/user.model');
+const Notification = require('../models/notification/Notification.model');
 
 const createPost = asyncHandler (async (req, res) => {
   const { description, category } = req.body;
@@ -26,9 +27,18 @@ const createPost = asyncHandler (async (req, res) => {
   
   userFound.posts.push(postCreated?._id);
   await userFound.save();
+
+  /*await Notification.create({
+    userId: req.user,
+    postId: postCreated._id,
+    message: 'Post Created',
+  })
+  */
+
   res.status(200).json(postCreated);
   });
-const getPosts = asyncHandler(async (req, res) => {
+
+  const getPosts = asyncHandler(async (req, res) => {
   const {category, title, page=1, limit=10} = req.query;
 
   let filter = {};

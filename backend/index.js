@@ -16,7 +16,7 @@ const calculatedEarnings = require('./utils/calculateEarnings');
 
 // calculatedEarnings();
 
-cron.schedule(
+/* cron.schedule(
   "59 23 * * * ",
   async () => {
     const today = new Date();
@@ -31,6 +31,7 @@ cron.schedule(
     timezone: "America/New_York",
   }
 );
+*/
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

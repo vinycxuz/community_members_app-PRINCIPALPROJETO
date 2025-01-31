@@ -12,31 +12,30 @@ const Home = () => {
       <div className="container px-4 mx-auto relative">
         <div className="relative z-20">
           <h1 className="text-center text-5xl lg:text-7xl font-bold font-heading mb-6 mt-14 max-w-2xl mx-auto">
-            <span>Explore the Power of</span>
-            <span className="block text-orange-600">Shared Wisdom</span>
+            <span>Criar sua comunidade</span>
+            <span className="block text-blue-600">é + conhecimento</span>
           </h1>
           <p className="text-center text-lg mb-10 max-w-lg mx-auto">
-            Embark on a journey of discovery and growth. Connect, collaborate,
-            and create with a global network of enthusiastic learners and
-            thinkers.
+            Crie conexões, faça networking, compartilhe e ganhe conhecimento, troque experiências e muito mais.
+            Independente da área de atuação, a comunidade é o melhor lugar para se conectar com pessoas que compartilham dos mesmos interesses.
           </p>
           <div className="flex justify-center lg:pb-56">
             <Link
-              to="/register"
-              className="w-full sm:w-auto h-16 inline-flex items-center justify-center text-center py-4 px-6 rounded-full bg-orange-600 border border-orange-700 shadow font-bold font-heading text-white hover:bg-orange-800 focus:ring focus:ring-blue-200 transition duration-200"
+              to="/user-register"
+              className="w-full sm:w-auto h-16 inline-flex items-center justify-center text-center py-4 px-6 rounded-full bg-blue-600 border border-blue-700 shadow font-bold font-heading text-white hover:bg-blue-800 focus:ring focus:ring-blue-200 transition duration-200"
             >
-              Get Started
+              Iniciar minha jornada
             </Link>
           </div>
         </div>
       </div>
-
-      {/* Featured Post */}
-      {/* <FeaturedPost post={featuredPost} /> */}
-      {/* Features */}
       <Features />
-      {/* Call to action */}
-      <CallToAction />
+      <Link
+              to="/user-register"
+              className="w-full sm:w-auto h-16 inline-flex items-center justify-center text-center py-4 px-6 rounded-full bg-blue-600 border border-blue-700 shadow font-bold font-heading text-white hover:bg-blue-800 focus:ring focus:ring-blue-200 transition duration-200"
+            >
+              Iniciar minha jornada
+      </Link>   
     </section>
   );
 };

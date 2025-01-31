@@ -14,7 +14,6 @@ export default function Navbar() {
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
-                  {/* Mobile menu button */}
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -26,8 +25,7 @@ export default function Navbar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-shrink-0 items-center">
-                  {/* Logo */}
-                  <FaBlog className="h-8 w-auto text-orange-500" />
+                  <FaBlog className="h-8 w-auto text-blue-500" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
                   <Link
@@ -40,25 +38,31 @@ export default function Navbar() {
                     to="/list-posts"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
-                    Latest Posts
+                    Posts
                   </Link>
                   <Link
                     to="/ranking"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
-                    Creators Ranking
+                    Ranking
                   </Link>
                   <Link
                     to="/pricing"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
-                    Pricing
+                    Planos
                   </Link>
                   <Link
                     to="/user-register"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
-                    Create Account
+                    Crie sua conta
+                  </Link>
+                  <Link
+                    to="/user-login"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  >
+                    Login
                   </Link>
                 </div>
               </div>
@@ -66,7 +70,7 @@ export default function Navbar() {
                 <div className="flex-shrink-0">
                   <Link
                     to="/create-post"
-                    className="relative inline-flex items-center gap-x-1.5 rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate-pulse"
+                    className="relative inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate-pulse"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                     Create Post

@@ -12,14 +12,10 @@ const Features = () => {
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
-        <p className="uppercase text-blue-600 text-center text-sm font-bold font-heading mb-4">
-          UNIQUE FEATURES
-        </p>
         <h1 className="text-center text-4xl lg:text-5xl font-bold font-heading mb-24">
-          Engage, Grow, and Monetize Your Passion
+          Engage, cresça e monetize sua paixão!
         </h1>
         <div className="flex flex-wrap -mx-4">
-          {/* Feature 1: Monetize Your Content */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4">
@@ -30,17 +26,15 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-green-500 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Earn with Every View
+                  Possibilidade de ganhar por views
                 </h2>
                 <p className="text-gray-600">
-                  Turn your passion into profit! Earn from every post view and
-                  build a steady stream of income through your content.
+                  Post mais visualizados, mais dinheiro no seu bolso. Ganhe por visualização, é só compartilhar.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Feature 2: Subscription and Followers */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4 border-l border-dashed border-gray-50 lg:border-transparent">
@@ -51,18 +45,15 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-red-600 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Build Your Community
+                  Faça sua comunidade
                 </h2>
                 <p className="text-gray-600">
-                  Grow your followers and engage with a dedicated audience.
-                  Offer exclusive content through subscriptions and keep your
-                  community thriving.
+                  Engage sua audiência e aumente seu networking na sua comunidade ou em outras voltavas para seus interesses em comum.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Feature 3: Dashboard */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4">
@@ -73,18 +64,15 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-blue-600 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Intuitive Dashboard
+                  Dashboard fácil de usar
                 </h2>
                 <p className="text-gray-600">
-                  Navigate your journey with ease. Our dashboard provides
-                  real-time insights into your performance and audience
-                  engagement.
+                  Sua jornada é facilidade com nossa plataforma simples e intuitiva.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Feature 4: Followers */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4">
@@ -95,18 +83,15 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-pink-500 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Connect with Followers
+                  Conecte com seus seguidores
                 </h2>
                 <p className="text-gray-600">
-                  Build a loyal fanbase. Engage directly with your followers,
-                  understand their preferences, and tailor your content to their
-                  interests.
+                  Monte sua fanbase com seus seguidores e tenha autoridade no seu nicho.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Feature 5: Creators Ranking */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4">
@@ -117,17 +102,15 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-yellow-500 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Creators Leaderboard
+                  Suba de nível
                 </h2>
                 <p className="text-gray-600">
-                  Climb the ranks in our creators leaderboard. Showcase your
-                  talent and gain recognition within our vibrant community.
+                  Produtores de conteúdos mais engajados estarão no painel geral de destaques. Isso mostrará que você é um produtor de conteúdo de qualidade.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Feature 6: Likes and Engagement */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="flex flex-col h-full">
               <div className="pb-4">
@@ -138,11 +121,10 @@ const Features = () => {
               <div className="relative pl-4 pb-12 border-l border-dashed border-gray-50 flex-1">
                 <div className="absolute top-0 -left-px bg-purple-600 w-0.5 h-6" />
                 <h2 className="text-2xl font-bold font-heading mb-4">
-                  Engage and Inspire
+                  Engage e Inspire
                 </h2>
                 <p className="text-gray-600">
-                  Foster engagement with likes and interactive features. Inspire
-                  your audience and encourage meaningful interactions.
+                  As comunidades são o melhor lugar para se conectar com pessoas que compartilham dos mesmos interesses. Inspire e seja inspirado.
                 </p>
               </div>
             </div>
