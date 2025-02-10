@@ -35,7 +35,7 @@ export default function Navbar() {
                     Home
                   </Link>
                   <Link
-                    to="/list-posts"
+                    to="/posts"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     Posts
@@ -73,7 +73,7 @@ export default function Navbar() {
                     className="relative inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate-pulse"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                    Create Post
+                    Criar Post
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">

@@ -29,6 +29,8 @@ import AccountVerification from './components/User/AccountVerification'
 import RequestResetPassword from './components/User/RequestResetPassowrd'
 import ResetPassword from './components/User/ResetPassword'
 import Rankings from './components/User/CreatorsRanking'
+import MyFollowers from './components/User/Followers'
+import MyFollowing from './components/User/Following'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -71,7 +73,15 @@ function App() {
             <AuthRoute>
               <AccountVerification />
             </AuthRoute>} path="account-verification/:verifyToken" />
-            
+            <Route element={<PostsList />} path="posts" />
+            <Route element={
+            <AuthRoute>
+              <MyFollowers />
+            </AuthRoute>} path="my-followers" />
+            <Route element={
+            <AuthRoute>
+              <MyFollowing />
+            </AuthRoute>} path="my-followings" />
         </Route>
         <Route element={<PostsList />} path="/posts/" />
         {/* <Route element={<UpdatePost />} path="/posts/:id" /> */}

@@ -202,7 +202,7 @@ export default function PrivateNavbar() {
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-orange-100">
                     <BellIcon
-                      className="h-5 w-5 text-orange-500"
+                      className="h-5 w-5 text-blue-600"
                       aria-hidden="true"
                     />
                   </span>

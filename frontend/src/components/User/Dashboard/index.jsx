@@ -5,7 +5,7 @@ import {
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { FaBlog } from "react-icons/fa6";
+import { FaBlogger } from "react-icons/fa6";
 import { Link, Outlet } from "react-router-dom";
 
 import {
@@ -20,43 +20,43 @@ import {
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
   {
-    name: "Create New Post",
+    name: "Criar novo post",
     href: "/dashboard/create-post",
     icon: FaUserEdit,
     current: false,
   },
   {
-    name: "My Posts",
+    name: "Meus Posts",
     href: "/dashboard/posts",
     icon: FaFileAlt,
     current: false,
   },
   {
-    name: "My Followers",
+    name: "Seguidores",
     href: "/dashboard/my-followers",
     icon: FaUsers,
     current: false,
   },
   {
-    name: "My Followings",
+    name: "Seguindo",
     href: "/dashboard/my-followings",
     icon: FaUsers,
     current: false,
   },
   {
-    name: "Create Plan",
+    name: "Criar Plano",
     href: "/dashboard/add-plan",
     icon: FaCalendarPlus,
     current: false,
   },
   {
-    name: "Add Category",
+    name: "Adicionar Categoria",
     href: "/dashboard/add-category",
     icon: FaTags,
     current: false,
   },
   {
-    name: "My Earnings",
+    name: "Minhas recompensas",
     href: "/dashboard/my-earnings",
     icon: FaWallet,
     current: false,
@@ -130,7 +130,7 @@ export default function UserDashbaord() {
                     <div className="flex h-16 shrink-0 items-center">
                       {/* Logo */}
                       <Link to="/">
-                        <FaBlog className="h-8 w-auto text-orange-500" />
+                        <FaBlogger className="h-8 w-auto text-orange-500" />
                       </Link>
                     </div>
                     <nav className="flex flex-1 flex-col">
@@ -177,7 +177,7 @@ export default function UserDashbaord() {
             <div className="flex h-16 shrink-0 items-center">
               {/* Logo */}
               <Link to="/">
-                <FaBlog className="h-8 w-auto text-orange-500" />
+                <FaBlogger className="h-8 w-auto text-blue-500" />
               </Link>
             </div>
             <nav className="flex flex-1 flex-col">
@@ -190,7 +190,7 @@ export default function UserDashbaord() {
                           to={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-50 text-orange-600"
+                              ? "bg-gray-50 text-blue-600"
                               : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
@@ -198,8 +198,8 @@ export default function UserDashbaord() {
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-orange-600"
-                                : "text-gray-400 group-hover:text-orange-600",
+                                ? "text-blue-600"
+                                : "text-gray-400 group-hover:text-blue-600",
                               "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
@@ -210,7 +210,7 @@ export default function UserDashbaord() {
                     ))}
                   </ul>
                 </li>
-
+                { /*}
                 <li className="mt-auto">
                   <Link
                     to="/dashboard/settings"
@@ -220,9 +220,10 @@ export default function UserDashbaord() {
                       className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                       aria-hidden="true"
                     />
-                    Settings
+                    Configurações
                   </Link>
                 </li>
+                {*/}
               </ul>
             </nav>
           </div>

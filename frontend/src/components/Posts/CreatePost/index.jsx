@@ -62,7 +62,7 @@ const CreatePost = () => {
     <div className="flex items-center justify-center">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 m-4">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
-          Add New Post
+          Criar novo post
         </h2>
         
         {isSuccess && (
@@ -75,7 +75,7 @@ const CreatePost = () => {
               htmlFor="description"
               className="block text-sm font-medium text-gray-700"
             >
-              Description
+              Descrição
             </label>
             <ReactQuill
               value={formik.values.description}
@@ -97,7 +97,7 @@ const CreatePost = () => {
               htmlFor="category"
               className="block text-sm font-medium text-gray-700"
             >
-              Category
+              Selecione a categoria do post
             </label>
             <Select 
               name='category'
@@ -118,7 +118,7 @@ const CreatePost = () => {
             )}
           </div>
 
-          
+          {/*
           <div className="flex flex-col items-center justify-center bg-gray-50 p-4 shadow rounded-lg">
             <label
               htmlFor="images"
@@ -143,9 +143,9 @@ const CreatePost = () => {
               </label>
             </div>
             
-            {/* {formik.touched.image && formik.errors.image && (
+            {formik.touched.image && formik.errors.image && (
               <p className="text-sm text-red-600">{formik.errors.image}</p>
-            )} */}
+            )}
 
             
             {/* {imageError && <p className="text-sm text-red-600">{imageError}</p>} */}
@@ -166,15 +166,14 @@ const CreatePost = () => {
                   <FaTimesCircle className="text-red-500" />
                 </button>
               </div>
-            )} */}
+            )}
           </div>
-
-          
+          */}
           <button
             type="submit"
             className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-orange-500 hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Add Post
+            Postar
           </button>
         </form>
       </div>
