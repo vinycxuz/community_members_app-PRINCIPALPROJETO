@@ -5,6 +5,6 @@ const earningsController = require('../controllers/earningsController');
 const authVerification = require('../middleware/AuthVerification');
 
 earningsRouter.get('/api/earnings', earningsController.getEarnings);
-earningsRouter.post('/api/my-earnings', authVerification, earningsController.getUserEarnings);
+earningsRouter.get('/api/my-earnings', authVerification, earningsController.getUserEarnings);
 
 module.exports = earningsRouter;

@@ -5,8 +5,8 @@ const PayingPremiumPlan = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-orange-100">
       <div className="p-8 bg-white rounded shadow-md w-80">
-        <FaCreditCard className="w-16 h-16 mx-auto text-orange-500" />
-        <h2 className="mt-6 text-2xl font-semibold text-center text-orange-700">
+        <FaCreditCard className="w-16 h-16 mx-auto text-blue-500" />
+        <h2 className="mt-6 text-2xl font-semibold text-center text-blue-700">
           Premium Plan Payment
         </h2>
         <p className="mt-2 text-center text-gray-500">

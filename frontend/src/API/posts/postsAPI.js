@@ -28,17 +28,21 @@ export const getPost = async (id) => {
   return posts.data;
 }
 
-export const updatePost = async (post) => {
+export const updatePost = async ({post, postId}) => {
   console.log(post?.id);
-  const response = await axios.put(`http://localhost:3000/api/posts/update/${post?.id}`, {
-    title: post.title,
+  const response = await axios.put(`http://localhost:3000/api/posts/update/${postId}`, {
     description: post.description,
+  },
+  {
+    withCredentials: true
   });
   return response.data;    
 }
 
 export const deletePost = async (id) => {
-  const posts = await axios.delete(`http://localhost:3000/api/posts/delete/${id}`);
+  const posts = await axios.delete(`http://localhost:3000/api/posts/delete/${id}`,{
+    withCredentials: true
+  });
   return posts.data;
 }
 
