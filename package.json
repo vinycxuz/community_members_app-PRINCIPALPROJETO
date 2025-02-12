@@ -1,0 +1,16 @@
+{
+  "name": "blog_project",
+  "version": "1.0.0",
+  "description": "Aplicação Web de criação de comunidades e membros, na qual permite você gerenciar seus conteúdos para seus membros, possibilitando maior controle e exclusividade:\r - Criação de conteúdos na sua comunidade\r - Personalização de mensalidades e membros\r - Curtidas e comentarios\r - Informações sobre todo seu perfil e comunidade",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm start --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
