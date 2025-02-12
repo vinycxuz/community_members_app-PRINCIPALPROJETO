@@ -3,13 +3,23 @@
 
 Aplicação Web de criação de comunidades e membros, na qual permite você gerenciar seus conteúdos para seus membros, possibilitando maior controle e exclusividade:
 - Criação de conteúdos na sua comunidade
-- Personalização de mensalidades e membros
 - Curtidas e comentarios
 - Informações sobre todo seu perfil e comunidade
 
 Esta aplicação segue sendo desenvolvida frequentemente única e exclusivamente para incremento de portfolio.
 
+# Funcionamento 
 
+Para rodar na sua máquina:
+
+- crie seu arquivo .env na pasta backend e coloque suas chaves
+- execute o comando 'npm i' no diretório backend e frontend no seu terminal
+- para rodar o backend, basta digitar no mesmo diretório node index e para o frontend, npm run dev.
+- certifique que as portas são 3000 para backend e 5173 para frontend. Caso seja diferente, faça as alterações em 'backend/routes'
+
+# Documentação
+
+Dentro de docs, existe o .yml de toda a documentação da API feita utilizando Swagger.io
 
 ## Tech Stack
 
@@ -28,9 +38,6 @@ Frontend:
 **Bibliotecas e frameworks**: React, TailwindCSS, Redux, Yup, Axios, React Query, Formik
 
 
-
-
-
 ## Environment Variables
 
 Para rodar esse projeto, irá precisar criar um arquivo .env para:
@@ -43,6 +50,7 @@ Para rodar esse projeto, irá precisar criar um arquivo .env para:
 
 `GOOGLE_CLIENT_SECRET` (chave da api de login com o google)
 
+`STRIPE_SECRET_KEY` (secret key do strapi para teste de pagamento via cartão)
 
 ## Support
 
