@@ -29,6 +29,10 @@ import AccountVerification from './components/User/AccountVerification'
 import RequestResetPassword from './components/User/RequestResetPassowrd'
 import ResetPassword from './components/User/ResetPassword'
 import Rankings from './components/User/CreatorsRanking'
+import MyFollowers from './components/User/Followers'
+import MyFollowing from './components/User/Following'
+import MyEarnings from './components/User/MyEarnings'
+import DashboardPosts from './components/User/DashboardPosts'
 
 function App() {
   const { isLoading, data, error, isSuccess, refetch } = useQuery({
@@ -61,6 +65,14 @@ function App() {
             </AuthRoute>} path="create-post" />
             <Route element={
             <AuthRoute>
+              <UpdatePost />
+            </AuthRoute>} path="update-post/:postId" />
+            <Route element={
+            <AuthRoute>
+              <DashboardPosts />
+            </AuthRoute>} path="posts" />
+            <Route element={
+            <AuthRoute>
               <CreatePlan />
             </AuthRoute>} path="add-plan" />
             <Route element={
@@ -71,7 +83,18 @@ function App() {
             <AuthRoute>
               <AccountVerification />
             </AuthRoute>} path="account-verification/:verifyToken" />
-            
+            <Route element={
+            <AuthRoute>
+              <MyFollowers />
+            </AuthRoute>} path="my-followers" />
+            <Route element={
+            <AuthRoute>
+              <MyFollowing />
+            </AuthRoute>} path="my-followings" />
+            <Route element={
+            <AuthRoute>
+              <MyEarnings />
+            </AuthRoute>} path="my-earnings" />
         </Route>
         <Route element={<PostsList />} path="/posts/" />
         {/* <Route element={<UpdatePost />} path="/posts/:id" /> */}

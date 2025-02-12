@@ -16,17 +16,17 @@ const PayingFreePlan = () => {
         <FaGift className="w-16 h-16 mx-auto text-green-500" />
 
         <h2 className="mt-6 text-2xl font-semibold text-center text-green-700">
-          Free Plan Activation
+          Plano gratuito
         </h2>
 
         <p className="mt-2 text-center text-gray-500">
-          Proceed to activate your free plan.
+          Ative o seu plano grátis para começar a criar posts.
         </p>
         <Link to='/dashboard/create-post'>
           <button
             className="mt-8 w-full py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
           >
-            Start Creating
+            Ativar
           </button>
         </Link>
       </div>

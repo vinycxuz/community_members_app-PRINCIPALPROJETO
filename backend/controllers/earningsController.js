@@ -29,4 +29,9 @@ const getEarnings = asyncHandler(async (req, res) => {
   res.status(200).json(earnings);
 });
 
-module.exports = { getEarnings };
+const getUserEarnings = asyncHandler(async (req, res) => {
+  const earnings = await Earning.find({user: req.user._id}).populate('posts');
+  res.status(200).json(earnings);
+});
+
+module.exports = { getEarnings, getUserEarnings };

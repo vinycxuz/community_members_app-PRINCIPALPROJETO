@@ -1,0 +1,251 @@
+openapi: 3.0.0
+info:
+  title: Posts API
+  description: API for managing blog posts
+  version: 1.0.0
+paths:
+  /api/posts/create:
+    post:
+      summary: Create a new post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post created successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api/posts:
+    get:
+      summary: Get all posts
+      tags:
+        - Posts
+      responses:
+        '200':
+          description: A list of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '400':
+          description: Bad request
+  /api/posts/update/{id}:
+    put:
+      summary: Update a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the post to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post updated successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Post not found
+  /api/posts/{id}:
+    get:
+      summary: Get a post by ID
+      tags:
+        - Posts
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the post to retrieve
+      responses:
+        '200':
+          description: Post retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Bad request
+        '404':
+          description: Post not found
+  /api/posts/delete/{id}:
+    delete:
+      summary: Delete a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the post to delete
+      responses:
+        '200':
+          description: Post deleted successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Post not found
+  /api/posts/like/{id}:
+    put:
+      summary: Like a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the post to like
+      responses:
+        '200':
+          description: Post liked successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Post not found
+  /api/posts/dislike/{id}:
+    put:
+      summary: Dislike a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the post to dislike
+      responses:
+        '200':
+          description: Post disliked successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Post not found
+components:
+  schemas:
+    Post:
+      type: object
+      required:
+        - description
+        - author
+      properties:
+        id:
+          type: string
+          description: The auto-generated id of the post
+        description:
+          type: string
+          description: Description of the post
+        image:
+          type: object
+          description: Image associated with the post
+        author:
+          type: string
+          description: ID of the author of the post
+        nextEarningDate:
+          type: string
+          format: date-time
+          description: The next earning date for the post
+        thisMonthEarnings:
+          type: number
+          description: Earnings for the current month
+        totalEarnings:
+          type: number
+          description: Total earnings from the post
+        lastCalculatedViewsCount:
+          type: number
+          description: Last calculated views count
+        category:
+          type: string
+          description: Category of the post
+        viewsCount:
+          type: number
+          description: Number of views
+        likes:
+          type: array
+          items:
+            type: string
+          description: List of user IDs who liked the post
+        dislikes:
+          type: array
+          items:
+            type: string
+          description: List of user IDs who disliked the post
+        viewers:
+          type: array
+          items:
+            type: string
+          description: List of user IDs who viewed the post
+        comments:
+          type: array
+          items:
+            type: string
+          description: List of comment IDs on the post
+        isBlocked:
+          type: boolean
+          description: Whether the post is blocked
+        createdAt:
+          type: string
+          format: date-time
+          description: The date the post was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date the post was last updated
+      example:
+        id: 60d0fe4f5311236168a109cd
+        description: This is a sample post
+        image: { url: "http://example.com/image.jpg", public_id: "sample_image" }
+        author: 60d0fe4f5311236168a109ca
+        nextEarningDate: 2021-07-01T00:00:00.000Z
+        thisMonthEarnings: 100
+        totalEarnings: 500
+        lastCalculatedViewsCount: 1000
+        category: 60d0fe4f5311236168a109cb
+        viewsCount: 1500
+        likes: [60d0fe4f5311236168a109ca]
+        dislikes: []
+        viewers: [60d0fe4f5311236168a109ca]
+        comments: [60d0fe4f5311236168a109cc]
+        isBlocked: false
+        createdAt: 2021-06-21T12:34:56.789Z
+        updatedAt: 2021-06-21T12:34:56.789Z

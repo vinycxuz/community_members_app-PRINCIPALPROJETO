@@ -18,9 +18,9 @@ const PaymentSuccess = () => {
       <div className="p-8 bg-white rounded-lg shadow-md max-w-md w-full">
         {isLoading ? (
           <div className="flex flex-col items-center space-y-4">
-            <FaSpinner className="animate-spin text-4xl text-orange-500" />
+            <FaSpinner className="animate-spin text-4xl text-blue-500" />
             <p className="text-lg text-gray-600">
-              Verifying your payment, please wait...
+              Verificando pagamento...
             </p>
           </div>
         ) : isError ? (
@@ -32,16 +32,16 @@ const PaymentSuccess = () => {
         ) : (
           <div className="flex flex-col items-center space-y-4">
             <FaCheckCircle className="text-5xl text-green-500" />
-            <h1 className="text-2xl font-bold">Payment Successful</h1>
+            <h1 className="text-2xl font-bold">Pagamento realizado com sucesso!</h1>
             <p className="text-gray-600">
-              Thank you for your payment. Your transaction ID is{" "}
+              Obrigado! Seu ID de pagamento é{" "}
               {paymentIntentId}.
             </p>
             <Link
               to="/dashboard/create-post"
-              className="w-full flex items-center justify-center py-2 px-4 bg-orange-500 text-white rounded hover:bg-orange-600 focus:outline-none"
+              className="w-full flex items-center justify-center py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
             >
-              Start Creating
+              Ir para dashboard
             </Link>
           </div>
         )}

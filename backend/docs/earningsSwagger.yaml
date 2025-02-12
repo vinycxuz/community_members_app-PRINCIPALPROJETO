@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  title: Earnings API
+  description: API for managing earnings
+  version: 1.0.0
+paths:
+  /api/earnings:
+    get:
+      summary: Get all earnings
+      tags:
+        - Earnings
+      responses:
+        '200':
+          description: A list of earnings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                      description: The ID of the user
+                      example: 60d0fe4f5311236168a109ca
+                    amount:
+                      type: number
+                      description: The amount earned
+                      example: 100.50
+                    post:
+                      type: string
+                      description: The ID of the post
+                      example: 60d0fe4f5311236168a109cb
+                    calculatedOn:
+                      type: string
+                      format: date-time
+                      description: The date the earning was calculated
+                      example: 2023-10-01T12:00:00Z
+        '500':
+          description: Internal server error

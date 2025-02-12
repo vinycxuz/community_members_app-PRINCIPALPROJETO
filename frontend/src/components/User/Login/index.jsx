@@ -7,32 +7,25 @@ import { loginAPI } from "../../../API/users/usersAPI";
 import AlertMessage from "../../Alert/AlertMessage";
 
 const Login = () => {
-  //navigate
   const navigate = useNavigate();
-  // user mutation
   const userMutation = useMutation({
     mutationKey: ["user-login"],
     mutationFn: loginAPI,
   });
-  // formik config
   const formik = useFormik({
-    // initial data
     initialValues: {
       email: "",
       password: "",
     },
-    // validation
     validationSchema: Yup.object({
       email: Yup.string().required("Username is required"),
       password: Yup.string().required("Password is required"),
     }),
-    // submit
     onSubmit: (values) => {
       console.log(values);
       userMutation
         .mutateAsync(values)
         .then(() => {
-          // redirect
           navigate("/dashboard");
         })
         .catch((err) => console.log(err));
@@ -48,9 +41,9 @@ const Login = () => {
               to="/register"
               className="inline-block text-gray-500 hover: transition duration-200 mb-8"
             >
-              <span>Don't have an account?</span> {""}
+              <span>Ainda não tem uma conta?</span> {""}
               <span />
-              <span className="font-bold font-heading">Register</span>
+              <span className="font-bold font-heading">Cadastre-se</span>
             </Link>
       
             {userMutation.isPending && (
@@ -69,15 +62,14 @@ const Login = () => {
               className="block text-sm font-medium mb-2"
               htmlFor="textInput1"
             >
-              Username
+              Email
             </label>
             <input
               className="w-full rounded-full p-4 outline-none border border-gray-100 shadow placeholder-gray-500 focus:ring focus:ring-orange-200 transition duration-200 mb-4"
               type="text"
-              placeholder="Enter username"
+              placeholder="email"
               {...formik.getFieldProps("email")}
             />
-            {/* error */}
             {formik.touched.email && formik.errors.email && (
               <div className="text-red-500 mt-1">{formik.errors.email}</div>
             )}
@@ -85,14 +77,14 @@ const Login = () => {
               className="block text-sm font-medium mb-2"
               htmlFor="textInput2"
             >
-              Password
+              Senha
             </label>
             <div className="flex items-center gap-1 w-full rounded-full p-4 border border-gray-100 shadow mb-8">
               <input
                 className="outline-none flex-1 placeholder-gray-500 "
                 id="textInput2"
                 type="password"
-                placeholder="Enter password"
+                placeholder="senha"
                 {...formik.getFieldProps("password")}
               />
               <svg
@@ -112,7 +104,6 @@ const Login = () => {
                 />
               </svg>
             </div>
-            {/* error */}
             {formik.touched.password && formik.errors.password && (
               <div className="text-red-500 mt-1">{formik.errors.password}</div>
             )}
@@ -158,8 +149,8 @@ const Login = () => {
                 Sign in with Google
               </span>
             </a>
-            <Link to="/forgot-password" className="text-gray-500">
-                Forgot Password?
+            <Link to="/forgot-password" className="text-gray-500" >
+                Esqueceu sua senha?
               </Link>
           </form>
         </div>

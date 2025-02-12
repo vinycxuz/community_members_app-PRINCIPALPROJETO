@@ -32,7 +32,7 @@ const PostDetails = () => {
 
   const userId = profileData?._id;
   const authorId = data?.author;
-  const isFollowing = profileData?.following?.find((user) => user?.toString() === authorId?.toString());
+  const isFollowing = profileData?.following?.find((user) => user?._id?.toString() === authorId?.toString());
   const postId = data?._id;
 
   console.log(postId)
@@ -144,7 +144,7 @@ const PostDetails = () => {
         <div className="flex justify-between items-center mb-3">
           <div
             className="rendered-html-content mb-2"
-            dangerouslySetInnerHTML={{ __html: data?.postFound?.description }}
+            dangerouslySetInnerHTML={{ __html: data?.description }}
           />
           
           {/* Edit delete icon */}

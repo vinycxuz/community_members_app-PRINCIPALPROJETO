@@ -50,19 +50,19 @@ const AccountSummaryDashboard = () => {
   const stats = [
     {
       icon: <FaEye />,
-      label: "Views",
+      label: "Visualizações",
       value: totalViews,
       bgColor: "bg-blue-500",
     },
     {
       icon: <FaDollarSign />,
-      label: "Earnings",
+      label: "Recompensas",
       value: `$${totalEarnings?.toFixed(2)}`,
       bgColor: "bg-green-500",
     },
     {
       icon: <FaUsers />,
-      label: "Followers",
+      label: "Seguidores",
       value: totalFollowers || 0,
       bgColor: "bg-purple-500",
     },
@@ -80,7 +80,7 @@ const AccountSummaryDashboard = () => {
     },
     {
       icon: <FaUsers />,
-      label: "Following",
+      label: "Seguindo",
       value: totalFollowing || 0,
       bgColor: "bg-indigo-500",
     },
@@ -114,7 +114,7 @@ const AccountSummaryDashboard = () => {
        font-bold text-2xl text-gray-800 mb-4
       "
       >
-        Welcome Back: {data?.username}
+        Olá,<br></br> {data?.username}
       </p>
       
       {verificationTokenMutation.isPending ? (
@@ -149,16 +149,16 @@ const AccountSummaryDashboard = () => {
           className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4"
           role="alert"
         >
-          <p className="font-bold">Account Verification Needed</p>
+          <p className="font-bold">Verifique sua conta</p>
           <p>
-            Your account is not verified. Please{" "}
+            Sua conta não está verificada. Por favor{" "}
             <button
               onClick={handleSendVerificationEmail}
               className="underline text-red-800"
             >
-              verify your account
+              verifique sua conta
             </button>{" "}
-            for full access.
+            para ter total acesso.
           </p>
         </div>
       )}
@@ -169,11 +169,11 @@ const AccountSummaryDashboard = () => {
         >
           <p className="font-bold">Email Required</p>
           <p>
-            Please{" "}
+            Por favor{" "}
             <Link to="/add-email" className="underline text-blue-800">
-              add an email
+              adicione um email
             </Link>{" "}
-            to your account for important notifications.
+            para sua conta receber importantes notificações.
           </p>
         </div>
       )}

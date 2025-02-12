@@ -89,7 +89,6 @@ const PostsList = () => {
            {console.log(filters)}
         </h1>
 
-        {/* <FeaturedPost post={featuredPost} /> */}
         <h2 className="text-4xl font-bold font-heading mb-10">
           Últimos posts
         </h2>
@@ -144,10 +143,7 @@ const PostsList = () => {
                   <div className="pt-6 pb-3 px-4">
                     <div
                       className="rendered-html-content mb-2"
-                      dangerouslySetInnerHTML={{
-                        __html: post?.description,
-                      }}
-                    />
+                      dangerouslySetInnerHTML={{ __html: post?.description?.substring(0, 100) + (post?.description?.length > 100 ? '...' : '') }}/>
                     <div className="flex flex-wrap items-center gap-3">
                       <p className="text-gray-500 text-sm">
                         {new Date(post.createdAt).toLocaleDateString()}
@@ -163,6 +159,9 @@ const PostsList = () => {
                       </svg>
                       <div className="py-1 px-2 rounded-md border border-gray-100 text-xs font-medium text-gray-700 inline-block">
                         {post?.category?.categoryName}
+                      </div>
+                      <div className="py-1 px-2 rounded-md border border-gray-100 text-xs font-medium text-gray-700 inline-block">
+                        {post?.likes?.length || 0} Likes
                       </div>
                     </div>
                   </div>
