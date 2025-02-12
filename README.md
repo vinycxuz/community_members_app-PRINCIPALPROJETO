@@ -17,6 +17,11 @@ Para rodar na sua máquina:
 - para rodar o backend, basta digitar no mesmo diretório node index e para o frontend, npm run dev.
 - certifique que as portas são 3000 para backend e 5173 para frontend. Caso seja diferente, faça as alterações em 'backend/routes'
 
+Para testar o cartão:
+- o numero do cartão é 4242 4242 4242 4242
+- o código de segurança pode ser qualquer um
+- o vencimento tem que ser acima da data atual
+
 # Documentação
 
 Dentro de docs, existe o .yml de toda a documentação da API feita utilizando Swagger.io
