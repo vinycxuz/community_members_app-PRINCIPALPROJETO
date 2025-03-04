@@ -84,19 +84,6 @@ Para rodar esse projeto, irá precisar criar um arquivo .env para:
 
 `STRIPE_SECRET_KEY` (secret key do strapi para teste de pagamento via cartão)
 
-## Support
-
-Para suporte, email: vinyby@gmail.com
-
-
 ## Next Updates
 
-- Filtrar por recente e outras opções os modelos de categoria, tipos de post, curtidas e data de postagem
-
-- Recuperação de senha e confirmação de e-mail com nodemailer
-
 - Editar a permanência de sessão utilizando redis, atualmente está com tempo de token pré-definido
-
-- Criação dos métodos de pagamento com Strapi (pelo github education tem benefícios exclusivos, mas posteriormente será feito com API de banco brasileiro para pagamentos via pix)
-
-- Bloqueio de usuários, assim como funciona no X por exemplo
