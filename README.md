@@ -22,6 +22,33 @@ Para testar o cartão:
 - o código de segurança pode ser qualquer um
 - o vencimento tem que ser acima da data atual
 
+# Screenshoot
+
+Totalmente responsivo: 
+
+![image](https://github.com/user-attachments/assets/eb12dcff-85ad-444b-8e57-d88dc04e0716)
+
+![image](https://github.com/user-attachments/assets/994aa174-e88a-40d5-893a-309b740f155e)
+
+![image](https://github.com/user-attachments/assets/1ad56b37-528c-45c1-bae8-bd60ed8d74ac)
+
+![image](https://github.com/user-attachments/assets/5958870a-8dde-4b6a-ac5c-804aa7f8e85f)
+
+![image](https://github.com/user-attachments/assets/c65a910a-bd4e-49b9-bc71-0f386291067d)
+
+![image](https://github.com/user-attachments/assets/2eae2fa2-601a-465a-9baa-b69a1eb36319)
+
+![image](https://github.com/user-attachments/assets/d78b2ac3-7395-46ee-a8ac-301d444a6b6a)
+
+![image](https://github.com/user-attachments/assets/4049f259-f6e8-4cee-8fcb-5a1bca0a15ae)
+
+![image](https://github.com/user-attachments/assets/fa0c97b1-e18b-4533-8112-be7dffbba499)
+
+![image](https://github.com/user-attachments/assets/dd5b0a2d-21ae-4dda-9bd5-73b6b2d49ec5)
+
+![image](https://github.com/user-attachments/assets/c47c702b-36cb-4986-9c1d-76ef94c85a43)
+
+
 # Documentação
 
 Dentro de docs, existe o .yml de toda a documentação da API feita utilizando Swagger.io
