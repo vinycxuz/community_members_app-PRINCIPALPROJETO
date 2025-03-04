@@ -65,7 +65,7 @@ const Login = () => {
               Email
             </label>
             <input
-              className="w-full rounded-full p-4 outline-none border border-gray-100 shadow placeholder-gray-500 focus:ring focus:ring-orange-200 transition duration-200 mb-4"
+              className="w-full rounded-full p-4 outline-none border border-gray-100 shadow placeholder-gray-500 focus:ring focus:ring-blue-200 transition duration-200 mb-4"
               type="text"
               placeholder="email"
               {...formik.getFieldProps("email")}
@@ -108,7 +108,7 @@ const Login = () => {
               <div className="text-red-500 mt-1">{formik.errors.password}</div>
             )}
             <button
-              className="h-14 inline-flex items-center justify-center py-4 px-6 text-white font-bold font-heading rounded-full bg-orange-500 w-full text-center border border-orange-600 shadow hover:bg-orange-600 focus:ring focus:ring-orange-200 transition duration-200 mb-8"
+              className="h-14 inline-flex items-center justify-center py-4 px-6 text-white font-bold font-heading rounded-full bg-blue-500 w-full text-center border border-blue-600 shadow hover:bg-blue-600 focus:ring focus:ring-blue-200 transition duration-200 mb-8"
               type="submit"
             >
               Login
@@ -116,7 +116,7 @@ const Login = () => {
             {/* login with google */}
             <a
               href="http://localhost:3000/user/auth/google"
-              className="h-14 inline-flex items-center justify-center gap-2 py-4 px-6 rounded-full bg-white w-full text-center border border-gray-100 shadow hover:bg-gray-50 focus:ring focus:ring-orange-200 transition duration-200"
+              className="h-14 inline-flex items-center justify-center gap-2 py-4 px-6 rounded-full bg-white w-full text-center border border-gray-100 shadow hover:bg-gray-50 focus:ring focus:ring-blue-200 transition duration-200"
               type="submit"
             >
               <svg
