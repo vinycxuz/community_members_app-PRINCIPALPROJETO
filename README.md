@@ -34,8 +34,6 @@ Totalmente responsivo:
 
 ![image](https://github.com/user-attachments/assets/5958870a-8dde-4b6a-ac5c-804aa7f8e85f)
 
-![image](https://github.com/user-attachments/assets/c65a910a-bd4e-49b9-bc71-0f386291067d)
-
 ![image](https://github.com/user-attachments/assets/2eae2fa2-601a-465a-9baa-b69a1eb36319)
 
 ![image](https://github.com/user-attachments/assets/d78b2ac3-7395-46ee-a8ac-301d444a6b6a)
